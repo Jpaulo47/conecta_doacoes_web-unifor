@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerenciar Minhas Doações - Conecta Doações">
+    <title>Meus Itens - Conecta Doações</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, #198754 0%, #157347 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 30px 20px;
+            position: sticky;
+            top: 0;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .user-profile {
+            margin-top: auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .main-content {
+            padding: 40px;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+        
+        .table img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-available {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+        
+        .status-reserved {
+            background: #fff3cd;
+            color: #664d03;
+        }
+        
+        .status-donated {
+            background: #d1d5db;
+            color: #374151;
+        }
+        
+        .tips-box {
+            background: #f8f9fa;
+            border-left: 4px solid #198754;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+        
+        .tips-box h5 {
+            color: #198754;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tips-box ul {
+            margin-bottom: 0;
+        }
+        
+        .tips-box li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar d-flex flex-column">
+                <div class="logo">
+                    <i class="bi bi-heart-fill"></i> Conecta Doações
+                    <div class="small mt-2" style="opacity: 0.9;">
+                        Juntos por um Futuro Sustentável
+                    </div>
+                </div>
+                
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i> Início
+                    </a>
+                    <a class="nav-link active" href="meus-itens.html">
+                        <i class="bi bi-box"></i> Meus Itens
+                    </a>
+                    <a class="nav-link" href="nova-doacao.html">
+                        <i class="bi bi-plus-circle"></i> Cadastrar Item
+                    </a>
+                    <a class="nav-link" href="mensagens.html">
+                        <i class="bi bi-envelope"></i> Mensagens
+                    </a>
+                    <a class="nav-link" href="#" id="btn-logout">
+                        <i class="bi bi-box-arrow-right"></i> Sair
+                    </a>
+                </nav>
+                
+                <div class="user-profile">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center" 
+                             style="width: 40px; height: 40px; color: #198754;">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="ms-2">
+                            <div class="small fw-bold" id="user-name">Carregando...</div>
+                            <div class="small" style="opacity: 0.8;" id="user-email"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                <h1 class="mb-4">Gerenciar Minhas Doações</h1>
+                
+                <!-- Alert Container -->
+                <div id="alert-container"></div>
+                
+                <!-- Search Box -->
+                <div class="search-box">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" class="form-control" id="search-input" 
+                               placeholder="Buscar Itens (Nome ou Categoria)">
+                    </div>
+                </div>
+                
+                <!-- Loading -->
+                <div class="text-center py-5" id="loading">
+                    <div class="spinner-border text-success" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                    <p class="mt-3 text-muted">Carregando suas doações...</p>
+                </div>
+                
+                <!-- Table Container -->
+                <div class="table-container d-none" id="table-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Imagem</th>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Status</th>
+                                <th style="width: 200px;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donations-table-body">
+                            <!-- Itens serão inseridos aqui dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Empty State -->
+                <div class="text-center py-5 d-none" id="no-items">
+                    <i class="bi bi-inbox" style="font-size: 64px; color: #ccc;"></i>
+                    <h4 class="mt-3 text-muted">Você ainda não cadastrou nenhum item</h4>
+                    <p class="text-muted">Comece a doar agora mesmo!</p>
+                    <a href="nova-doacao.html" class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i> Cadastrar Primeiro Item
+                    </a>
+                </div>
+                
+                <!-- Tips Box -->
+                <div class="tips-box">
+                    <h5><i class="bi bi-lightbulb"></i> Dicas para Suas Doações</h5>
+                    <ul>
+                        <li><strong>Prepare os itens:</strong> limpe e conserte o que for necessário.</li>
+                        <li><strong>Tire boas fotos:</strong> mostre os itens de forma clara.</li>
+                        <li><strong>Descreva com detalhes:</strong> inclua marca, modelo e estado de conservação.</li>
+                        <li><strong>Responda rápido:</strong> mantenha contato com potenciais doadores.</li>
+                        <li><strong>Combine a entrega:</strong> defina um local e horário seguro para a retirada.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Moderno -->
+    <footer class="footer-modern mt-5" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important; background-color: #1a1a1a !important; color: #ffffff !important;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Logo e Descrição -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand mb-3">
+                        <h4 class="fw-bold text-white mb-2">
+                            <i class="bi bi-heart-fill text-success"></i> Conecta Doações
+                        </h4>
+                        <p class="text-white-50 mb-3">
+                            Conectando doadores e beneficiários em comunidades locais, promovendo a economia circular e reduzindo o desperdício.
+                        </p>
+                        <div class="footer-ods-badge">
+                            <span class="badge bg-success px-3 py-2">
+                                <i class="bi bi-globe"></i> ODS 11 - Cidades Sustentáveis
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-link-45deg"></i> Links Rápidos
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-house me-2"></i> Início
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="login.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Entrar
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="como-funciona.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-question-circle me-2"></i> Como Funciona
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="sobre.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-info-circle me-2"></i> Sobre
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Navegação -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-compass"></i> Navegação
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-search me-2"></i> Buscar Doações
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="nova-doacao.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-plus-circle me-2"></i> Doar Item
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="meus-itens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box me-2"></i> Meus Itens
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="mensagens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-envelope me-2"></i> Mensagens
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ODS 11 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-globe-americas"></i> Objetivos ODS
+                    </h6>
+                    <div class="footer-ods-content">
+                        <p class="text-white-50 small mb-3">
+                            Contribuímos para o <strong class="text-white">ODS 11</strong> - Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.
+                        </p>
+                        <div class="footer-social">
+                            <p class="text-white-50 small mb-2">Conecte-se conosco:</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-light text-dark">Sustentabilidade</span>
+                                <span class="badge bg-light text-dark">Comunidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <hr class="footer-divider my-4">
+            
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <p class="text-white-50 small mb-2 mb-md-0">
+                            &copy; 2025 <strong class="text-white">Conecta Doações</strong>. Todos os direitos reservados.
+                        </p>
+                        <p class="text-white-50 small mb-0">
+                            MVP - Etapa 2 (N708) | Desenvolvido com <i class="bi bi-heart-fill text-danger"></i> para comunidades sustentáveis
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase e Lógica -->
+    <script type="module">
+        import { auth, getCurrentUser, getUserData, signOutUser } from './js/auth.js';
+        import { getUserDonations, deleteDonation } from './js/donations.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        // ========================================
+        // VERIFICAR AUTENTICAÇÃO
+        // ========================================
+        
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                alert('Você precisa estar logado para acessar esta página.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Carregar dados do usuário
+            const userData = await getUserData(user.uid);
+            if (userData.success) {
+                document.getElementById('user-name').textContent = userData.data.name || user.displayName;
+                document.getElementById('user-email').textContent = user.email;
+            }
+            
+            // Carregar doações
+            loadDonations();
+        });
+
+        // ========================================
+        // FUNÇÕES AUXILIARES
+        // ========================================
+
+        function showAlert(message, type = 'danger') {
+            const alertContainer = document.getElementById('alert-container');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alert);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        function getStatusBadge(status) {
+            const badges = {
+                'available': '<span class="status-badge status-available">Disponível</span>',
+                'reserved': '<span class="status-badge status-reserved">Reservado</span>',
+                'donated': '<span class="status-badge status-donated">Doado</span>'
+            };
+            return badges[status] || badges['available'];
+        }
+
+        // ========================================
+        // CARREGAR DOAÇÕES
+        // ========================================
+
+        async function loadDonations() {
+            const user = getCurrentUser();
+            if (!user) return;
+
+            const loading = document.getElementById('loading');
+            const tableContainer = document.getElementById('table-container');
+            const noItems = document.getElementById('no-items');
+            const tableBody = document.getElementById('donations-table-body');
+
+            // Mostrar loading
+            loading.classList.remove('d-none');
+            tableContainer.classList.add('d-none');
+            noItems.classList.add('d-none');
+
+            try {
+                const donations = await getUserDonations(user.uid);
+
+                // Esconder loading
+                loading.classList.add('d-none');
+
+                if (donations.length === 0) {
+                    noItems.classList.remove('d-none');
+                    return;
+                }
+
+                // Limpar tabela
+                tableBody.innerHTML = '';
+
+                // Renderizar itens
+                donations.forEach(donation => {
+                    const row = createTableRow(donation);
+                    tableBody.appendChild(row);
+                });
+
+                // Mostrar tabela
+                tableContainer.classList.remove('d-none');
+
+                // Configurar busca
+                setupSearch();
+            } catch (error) {
+                console.error('Erro ao carregar doações:', error);
+                showAlert('Erro ao carregar suas doações. Tente novamente.', 'danger');
+                loading.classList.add('d-none');
+            }
+        }
+
+        // ========================================
+        // CRIAR LINHA DA TABELA
+        // ========================================
+
+        function createTableRow(donation) {
+            const tr = document.createElement('tr');
+            
+            tr.innerHTML = `
+                <td>
+                    <img src="${donation.imageUrl}" 
+                         alt="${donation.title}" 
+                         onerror="this.src='https://via.placeholder.com/60x60?text=Sem+Imagem'"
+                         class="img-thumbnail">
+                </td>
+                <td>
+                    <strong>${donation.title}</strong>
+                    <br>
+                    <small class="text-muted">${donation.location}</small>
+                </td>
+                <td>
+                    <span class="badge bg-primary">${donation.category}</span>
+                </td>
+                <td>
+                    ${getStatusBadge(donation.status)}
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a href="editar-item.html?id=${donation.id}" 
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <button type="button" 
+                                class="btn btn-sm btn-outline-danger delete-btn" 
+                                data-id="${donation.id}"
+                                data-title="${donation.title}">
+                            <i class="bi bi-trash"></i> Excluir
+                        </button>
+                    </div>
+                </td>
+            `;
+
+            // Adicionar event listener para excluir
+            const deleteBtn = tr.querySelector('.delete-btn');
+            deleteBtn.addEventListener('click', () => {
+                handleDelete(donation.id, donation.title);
+            });
+
+            return tr;
+        }
+
+        // ========================================
+        // EXCLUIR DOAÇÃO
+        // ========================================
+
+        async function handleDelete(donationId, donationTitle) {
+            if (!confirm(`Tem certeza que deseja excluir "${donationTitle}"?\n\nEsta ação não pode ser desfeita.`)) {
+                return;
+            }
+
+            try {
+                const result = await deleteDonation(donationId);
+
+                if (result.success) {
+                    showAlert('Item excluído com sucesso!', 'success');
+                    loadDonations(); // Recarregar lista
+                } else {
+                    showAlert(result.error || 'Erro ao excluir item.', 'danger');
+                }
+            } catch (error) {
+                console.error('Erro ao excluir:', error);
+                showAlert('Erro ao excluir item. Tente novamente.', 'danger');
+            }
+        }
+
+        // ========================================
+        // BUSCA
+        // ========================================
+
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            const tableBody = document.getElementById('donations-table-body');
+            const rows = tableBody.querySelectorAll('tr');
+
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // ========================================
+        // LOGOUT
+        // ========================================
+
+        document.getElementById('btn-logout').addEventListener('click', async (e) => {
+            e.preventDefault();
+            const result = await signOutUser();
+            if (result.success) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
+

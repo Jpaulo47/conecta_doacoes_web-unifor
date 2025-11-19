@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login e Cadastro - Conecta Doações">
+    <title>Entrar - Conecta Doações</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .login-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, #198754 0%, #157347 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin: -40px -40px 30px -40px;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .login-header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .login-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 30px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #6c757d;
+            font-weight: 600;
+            border: none;
+            padding: 15px 30px;
+            transition: all 0.3s;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            color: #198754;
+            border: none;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: #198754;
+            border: none;
+            border-bottom: 3px solid #198754;
+            background: transparent;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
+        }
+        
+        .alert {
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .password-toggle {
+            position: relative;
+        }
+        
+        .password-toggle .toggle-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+        }
+        
+        .form-check-input:checked {
+            background-color: #198754;
+            border-color: #198754;
+        }
+        
+        .loading-spinner {
+            display: none;
+        }
+        
+        .loading-spinner.active {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Simples -->
+    <nav class="navbar navbar-light bg-success shadow-sm">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="index.html">
+                <i class="bi bi-heart-fill"></i> Conecta Doações
+            </a>
+        </div>
+    </nav>
+
+    <!-- Container de Login -->
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Header do Card -->
+            <div class="login-header">
+                <h1><i class="bi bi-heart-fill"></i> Conecta Doações</h1>
+                <p>Juntos por um Futuro Sustentável</p>
+            </div>
+
+            <!-- Alert de mensagens -->
+            <div id="alert-container"></div>
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs" id="loginTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" 
+                            type="button" role="tab">
+                        <i class="bi bi-box-arrow-in-right"></i> Entrar
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cadastro-tab" data-bs-toggle="tab" data-bs-target="#cadastro" 
+                            type="button" role="tab">
+                        <i class="bi bi-person-plus"></i> Cadastrar
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="loginTabsContent">
+                <!-- Tab Login -->
+                <div class="tab-pane fade show active" id="login" role="tabpanel">
+                    <form id="form-login">
+                        <div class="mb-3">
+                            <label for="login-email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="login-email" 
+                                   placeholder="Seu e-mail" required>
+                            <div class="invalid-feedback">
+                                Por favor, insira um e-mail válido.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="login-password" class="form-label">Senha</label>
+                            <div class="password-toggle">
+                                <input type="password" class="form-control" id="login-password" 
+                                       placeholder="Sua senha" required minlength="6">
+                                <i class="bi bi-eye toggle-icon" id="toggle-login-password"></i>
+                            </div>
+                            <div class="invalid-feedback">
+                                A senha deve ter no mínimo 6 caracteres.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-login">
+                            <span class="btn-text">Entrar</span>
+                            <span class="spinner-border spinner-border-sm loading-spinner ms-2" role="status">
+                                <span class="visually-hidden">Carregando...</span>
+                            </span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Tab Cadastro -->
+                <div class="tab-pane fade" id="cadastro" role="tabpanel">
+                    <form id="form-cadastro">
+                        <div class="mb-3">
+                            <label for="cadastro-nome" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="cadastro-nome" 
+                                   placeholder="Seu nome completo" required minlength="3">
+                            <div class="invalid-feedback">
+                                O nome deve ter no mínimo 3 caracteres.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="cadastro-email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="cadastro-email" 
+                                   placeholder="Seu e-mail" required>
+                            <div class="invalid-feedback">
+                                Por favor, insira um e-mail válido.
+                            </div>
+                        </div>
+
+                        <!-- Endereço -->
+                        <div class="mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-geo-alt"></i> Endereço
+                            </label>
+                            
+                            <!-- CEP -->
+                            <div class="mb-3">
+                                <label for="cadastro-cep" class="form-label">CEP *</label>
+                                <div class="d-flex gap-2">
+                                    <div class="flex-grow-1">
+                                        <input type="text" class="form-control" id="cadastro-cep" 
+                                               placeholder="00000-000" maxlength="9" required
+                                               pattern="[0-9]{5}-?[0-9]{3}">
+                                        <small class="text-muted d-block mt-1">Digite o CEP para preencher automaticamente</small>
+                                        <div class="invalid-feedback">
+                                            CEP inválido. Digite um CEP válido.
+                                        </div>
+                                        <div id="cep-loading" class="spinner-border spinner-border-sm text-primary d-none mt-2" role="status">
+                                            <span class="visually-hidden">Buscando...</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start pt-0">
+                                        <button type="button" class="btn btn-outline-primary" id="btn-buscar-cep" style="margin-top: 0;">
+                                            <i class="bi bi-search"></i> Buscar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Logradouro -->
+                            <div class="mb-3">
+                                <label for="cadastro-logradouro" class="form-label">Logradouro (Rua/Avenida) *</label>
+                                <input type="text" class="form-control" id="cadastro-logradouro" 
+                                       placeholder="Nome da rua ou avenida" required>
+                                <div class="invalid-feedback">
+                                    Informe o logradouro.
+                                </div>
+                            </div>
+                            
+                            <!-- Número e Complemento -->
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="cadastro-numero" class="form-label">Número *</label>
+                                    <input type="text" class="form-control" id="cadastro-numero" 
+                                           placeholder="123" required>
+                                    <div class="invalid-feedback">
+                                        Informe o número.
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <label for="cadastro-complemento" class="form-label">Complemento</label>
+                                    <input type="text" class="form-control" id="cadastro-complemento" 
+                                           placeholder="Apto, Bloco, etc.">
+                                </div>
+                            </div>
+                            
+                            <!-- Bairro -->
+                            <div class="mb-3">
+                                <label for="cadastro-bairro" class="form-label">Bairro *</label>
+                                <input type="text" class="form-control" id="cadastro-bairro" 
+                                       placeholder="Nome do bairro" required>
+                                <div class="invalid-feedback">
+                                    Informe o bairro.
+                                </div>
+                            </div>
+                            
+                            <!-- Cidade e UF -->
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <label for="cadastro-cidade" class="form-label">Cidade *</label>
+                                    <input type="text" class="form-control" id="cadastro-cidade" 
+                                           placeholder="Nome da cidade" required>
+                                    <div class="invalid-feedback">
+                                        Informe a cidade.
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="cadastro-uf" class="form-label">UF (Estado) *</label>
+                                    <select class="form-select" id="cadastro-uf" required>
+                                        <option value="">Selecione</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AP">AP</option>
+                                        <option value="AM">AM</option>
+                                        <option value="BA">BA</option>
+                                        <option value="CE">CE</option>
+                                        <option value="DF">DF</option>
+                                        <option value="ES">ES</option>
+                                        <option value="GO">GO</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MG">MG</option>
+                                        <option value="PA">PA</option>
+                                        <option value="PB">PB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="PE">PE</option>
+                                        <option value="PI">PI</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="RN">RN</option>
+                                        <option value="RS">RS</option>
+                                        <option value="RO">RO</option>
+                                        <option value="RR">RR</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SP">SP</option>
+                                        <option value="SE">SE</option>
+                                        <option value="TO">TO</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Selecione o estado.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="cadastro-password" class="form-label">Senha</label>
+                            <div class="password-toggle">
+                                <input type="password" class="form-control" id="cadastro-password" 
+                                       placeholder="Mínimo 6 caracteres" required minlength="6">
+                                <i class="bi bi-eye toggle-icon" id="toggle-cadastro-password"></i>
+                            </div>
+                            <div class="invalid-feedback">
+                                A senha deve ter no mínimo 6 caracteres.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="cadastro-confirm-password" class="form-label">Confirmar Senha</label>
+                            <div class="password-toggle">
+                                <input type="password" class="form-control" id="cadastro-confirm-password" 
+                                       placeholder="Digite a senha novamente" required minlength="6">
+                                <i class="bi bi-eye toggle-icon" id="toggle-confirm-password"></i>
+                            </div>
+                            <div class="invalid-feedback">
+                                As senhas não coincidem.
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="aceitar-termos" required>
+                            <label class="form-check-label" for="aceitar-termos">
+                                Aceito os <a href="#" class="text-success">termos de serviço</a> e 
+                                <a href="#" class="text-success">política de privacidade</a>
+                            </label>
+                            <div class="invalid-feedback">
+                                Você deve aceitar os termos para continuar.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-login">
+                            <span class="btn-text">Cadastrar</span>
+                            <span class="spinner-border spinner-border-sm loading-spinner ms-2" role="status">
+                                <span class="visually-hidden">Carregando...</span>
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Moderno -->
+    <footer class="footer-modern mt-5" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important; background-color: #1a1a1a !important; color: #ffffff !important;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Logo e Descrição -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand mb-3">
+                        <h4 class="fw-bold text-white mb-2">
+                            <i class="bi bi-heart-fill text-success"></i> Conecta Doações
+                        </h4>
+                        <p class="text-white-50 mb-3">
+                            Conectando doadores e beneficiários em comunidades locais, promovendo a economia circular e reduzindo o desperdício.
+                        </p>
+                        <div class="footer-ods-badge">
+                            <span class="badge bg-success px-3 py-2">
+                                <i class="bi bi-globe"></i> ODS 11 - Cidades Sustentáveis
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-link-45deg"></i> Links Rápidos
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-house me-2"></i> Início
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="login.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Entrar
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="como-funciona.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-question-circle me-2"></i> Como Funciona
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="sobre.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-info-circle me-2"></i> Sobre
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Navegação -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-compass"></i> Navegação
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-search me-2"></i> Buscar Doações
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="nova-doacao.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-plus-circle me-2"></i> Doar Item
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="meus-itens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box me-2"></i> Meus Itens
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="mensagens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-envelope me-2"></i> Mensagens
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ODS 11 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-globe-americas"></i> Objetivos ODS
+                    </h6>
+                    <div class="footer-ods-content">
+                        <p class="text-white-50 small mb-3">
+                            Contribuímos para o <strong class="text-white">ODS 11</strong> - Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.
+                        </p>
+                        <div class="footer-social">
+                            <p class="text-white-50 small mb-2">Conecte-se conosco:</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-light text-dark">Sustentabilidade</span>
+                                <span class="badge bg-light text-dark">Comunidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <hr class="footer-divider my-4">
+            
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <p class="text-white-50 small mb-2 mb-md-0">
+                            &copy; 2025 <strong class="text-white">Conecta Doações</strong>. Todos os direitos reservados.
+                        </p>
+                        <p class="text-white-50 small mb-0">
+                            MVP - Etapa 2 (N708) | Desenvolvido com <i class="bi bi-heart-fill text-danger"></i> para comunidades sustentáveis
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase e Lógica -->
+    <script type="module">
+        import { signIn, signUp } from './js/auth.js';
+
+        // ========================================
+        // FUNÇÕES AUXILIARES
+        // ========================================
+
+        // Mostrar alerta
+        function showAlert(message, type = 'danger') {
+            const alertContainer = document.getElementById('alert-container');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alert);
+
+            // Auto-remover após 5 segundos
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        // Toggle spinner de loading
+        function toggleLoading(button, isLoading) {
+            const spinner = button.querySelector('.loading-spinner');
+            const text = button.querySelector('.btn-text');
+            
+            if (isLoading) {
+                button.disabled = true;
+                spinner.classList.add('active');
+                text.textContent = 'Aguarde...';
+            } else {
+                button.disabled = false;
+                spinner.classList.remove('active');
+                text.textContent = button.id === 'form-login' ? 'Entrar' : 'Cadastrar';
+            }
+        }
+
+        // Validar formulário Bootstrap
+        function validateForm(form) {
+            form.classList.add('was-validated');
+            return form.checkValidity();
+        }
+
+        // ========================================
+        // TOGGLE SENHA (MOSTRAR/OCULTAR)
+        // ========================================
+
+        function setupPasswordToggle(toggleId, inputId) {
+            const toggle = document.getElementById(toggleId);
+            const input = document.getElementById(inputId);
+            
+            if (toggle && input) {
+                toggle.addEventListener('click', () => {
+                    const type = input.type === 'password' ? 'text' : 'password';
+                    input.type = type;
+                    toggle.classList.toggle('bi-eye');
+                    toggle.classList.toggle('bi-eye-slash');
+                });
+            }
+        }
+
+        setupPasswordToggle('toggle-login-password', 'login-password');
+        setupPasswordToggle('toggle-cadastro-password', 'cadastro-password');
+        setupPasswordToggle('toggle-confirm-password', 'cadastro-confirm-password');
+
+        // ========================================
+        // FORM LOGIN
+        // ========================================
+
+        const formLogin = document.getElementById('form-login');
+        formLogin.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!validateForm(formLogin)) {
+                showAlert('Por favor, preencha todos os campos corretamente.', 'warning');
+                return;
+            }
+
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const submitBtn = formLogin.querySelector('button[type="submit"]');
+
+            toggleLoading(submitBtn, true);
+
+            try {
+                const result = await signIn(email, password);
+
+                if (result.success) {
+                    showAlert('Login realizado com sucesso! Redirecionando...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    showAlert(result.error, 'danger');
+                    toggleLoading(submitBtn, false);
+                }
+            } catch (error) {
+                showAlert('Erro ao fazer login. Tente novamente.', 'danger');
+                toggleLoading(submitBtn, false);
+            }
+        });
+
+        // ========================================
+        // BUSCA DE CEP (VIA CEP API)
+        // ========================================
+        
+        // Máscara de CEP
+        const cepInput = document.getElementById('cadastro-cep');
+        if (cepInput) {
+            cepInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 5) {
+                    value = value.substring(0, 5) + '-' + value.substring(5, 8);
+                }
+                e.target.value = value;
+            });
+        }
+
+        // Função para buscar CEP
+        async function buscarCEP(cep) {
+            // Remover formatação
+            cep = cep.replace(/\D/g, '');
+            
+            // Validar formato
+            if (cep.length !== 8) {
+                showAlert('CEP deve conter 8 dígitos.', 'warning');
+                return null;
+            }
+
+            const loading = document.getElementById('cep-loading');
+            const btnBuscar = document.getElementById('btn-buscar-cep');
+            
+            try {
+                loading.classList.remove('d-none');
+                btnBuscar.disabled = true;
+
+                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const data = await response.json();
+
+                if (data.erro) {
+                    showAlert('CEP não encontrado. Verifique o CEP digitado.', 'warning');
+                    return null;
+                }
+
+                // Preencher campos automaticamente
+                document.getElementById('cadastro-logradouro').value = data.logradouro || '';
+                document.getElementById('cadastro-bairro').value = data.bairro || '';
+                document.getElementById('cadastro-cidade').value = data.localidade || '';
+                document.getElementById('cadastro-uf').value = data.uf || '';
+                
+                // Focar no campo número
+                document.getElementById('cadastro-numero').focus();
+
+                showAlert('Endereço encontrado! Complete com o número.', 'success');
+                return data;
+
+            } catch (error) {
+                console.error('Erro ao buscar CEP:', error);
+                showAlert('Erro ao buscar CEP. Tente novamente.', 'danger');
+                return null;
+            } finally {
+                loading.classList.add('d-none');
+                btnBuscar.disabled = false;
+            }
+        }
+
+        // Event listener para botão de buscar CEP
+        const btnBuscarCep = document.getElementById('btn-buscar-cep');
+        if (btnBuscarCep) {
+            btnBuscarCep.addEventListener('click', async () => {
+                const cep = document.getElementById('cadastro-cep').value;
+                await buscarCEP(cep);
+            });
+        }
+
+        // Buscar CEP automaticamente ao digitar 8 dígitos
+        if (cepInput) {
+            cepInput.addEventListener('blur', async function() {
+                const cep = this.value.replace(/\D/g, '');
+                if (cep.length === 8) {
+                    await buscarCEP(cep);
+                }
+            });
+        }
+
+        // ========================================
+        // FORM CADASTRO
+        // ========================================
+
+        const formCadastro = document.getElementById('form-cadastro');
+        formCadastro.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!validateForm(formCadastro)) {
+                showAlert('Por favor, preencha todos os campos corretamente.', 'warning');
+                return;
+            }
+
+            const nome = document.getElementById('cadastro-nome').value.trim();
+            const email = document.getElementById('cadastro-email').value.trim();
+            const password = document.getElementById('cadastro-password').value;
+            const confirmPassword = document.getElementById('cadastro-confirm-password').value;
+            
+            // Obter dados do endereço
+            const cep = document.getElementById('cadastro-cep').value.trim().replace(/\D/g, '');
+            const logradouro = document.getElementById('cadastro-logradouro').value.trim();
+            const numero = document.getElementById('cadastro-numero').value.trim();
+            const complemento = document.getElementById('cadastro-complemento').value.trim();
+            const bairro = document.getElementById('cadastro-bairro').value.trim();
+            const cidade = document.getElementById('cadastro-cidade').value.trim();
+            const uf = document.getElementById('cadastro-uf').value;
+            
+            // Validar CEP
+            if (cep.length !== 8) {
+                showAlert('CEP inválido. Digite um CEP válido com 8 dígitos.', 'warning');
+                document.getElementById('cadastro-cep').classList.add('is-invalid');
+                return;
+            }
+            
+            // Validar campos obrigatórios do endereço
+            if (!logradouro || !numero || !bairro || !cidade || !uf) {
+                showAlert('Por favor, preencha todos os campos obrigatórios do endereço.', 'warning');
+                return;
+            }
+            
+            // Montar endereço completo para compatibilidade
+            const location = `${cidade}, ${uf} - ${bairro}`;
+            
+            // Objeto de endereço completo
+            const address = {
+                cep: cep,
+                logradouro: logradouro,
+                numero: numero,
+                complemento: complemento,
+                bairro: bairro,
+                cidade: cidade,
+                uf: uf,
+                location: location // Para compatibilidade com código antigo
+            };
+            
+            console.log('📮 Endereço a ser salvo:', address);
+            const aceitouTermos = document.getElementById('aceitar-termos').checked;
+
+            // Validar senhas
+            if (password !== confirmPassword) {
+                showAlert('As senhas não coincidem.', 'danger');
+                document.getElementById('cadastro-confirm-password').classList.add('is-invalid');
+                return;
+            }
+
+            if (!aceitouTermos) {
+                showAlert('Você deve aceitar os termos de serviço.', 'warning');
+                return;
+            }
+
+            const submitBtn = formCadastro.querySelector('button[type="submit"]');
+            toggleLoading(submitBtn, true);
+
+            try {
+                const result = await signUp(nome, email, password, address);
+
+                if (result.success) {
+                    showAlert('Cadastro realizado com sucesso! Redirecionando...', 'success');
+                    formCadastro.reset();
+                    formCadastro.classList.remove('was-validated');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    showAlert(result.error, 'danger');
+                    toggleLoading(submitBtn, false);
+                }
+            } catch (error) {
+                showAlert('Erro ao criar conta. Tente novamente.', 'danger');
+                toggleLoading(submitBtn, false);
+            }
+        });
+
+        // ========================================
+        // VALIDAÇÃO EM TEMPO REAL
+        // ========================================
+
+        // Validar confirmação de senha em tempo real
+        const confirmPasswordInput = document.getElementById('cadastro-confirm-password');
+        const passwordInput = document.getElementById('cadastro-password');
+
+        confirmPasswordInput.addEventListener('input', () => {
+            if (confirmPasswordInput.value !== passwordInput.value) {
+                confirmPasswordInput.setCustomValidity('As senhas não coincidem');
+            } else {
+                confirmPasswordInput.setCustomValidity('');
+            }
+        });
+
+        passwordInput.addEventListener('input', () => {
+            if (confirmPasswordInput.value && confirmPasswordInput.value !== passwordInput.value) {
+                confirmPasswordInput.setCustomValidity('As senhas não coincidem');
+            } else {
+                confirmPasswordInput.setCustomValidity('');
+            }
+        });
+    </script>
+</body>
+</html>
+

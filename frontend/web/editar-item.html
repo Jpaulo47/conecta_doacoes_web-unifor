@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Editar Item de Doação - Conecta Doações">
+    <title>Editar Item - Conecta Doações</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, #198754 0%, #157347 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 30px 20px;
+            position: sticky;
+            top: 0;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .user-profile {
+            margin-top: auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .main-content {
+            padding: 40px;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: #198754;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        
+        .form-control,
+        .form-select {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+        }
+        
+        .image-preview-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .image-preview-item {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #e9ecef;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-preview-item .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(220, 53, 69, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-preview-item .remove-btn:hover {
+            background: rgba(220, 53, 69, 1);
+            transform: scale(1.1);
+        }
+        
+        .image-preview-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .status-toggle {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .form-check-input:checked {
+            background-color: #198754;
+            border-color: #198754;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar d-flex flex-column">
+                <div class="logo">
+                    <i class="bi bi-heart-fill"></i> Conecta Doações
+                    <div class="small mt-2" style="opacity: 0.9;">
+                        Juntos por um Futuro Sustentável
+                    </div>
+                </div>
+                
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i> Início
+                    </a>
+                    <a class="nav-link active" href="meus-itens.html">
+                        <i class="bi bi-box"></i> Meus Itens
+                    </a>
+                    <a class="nav-link" href="nova-doacao.html">
+                        <i class="bi bi-plus-circle"></i> Cadastrar Item
+                    </a>
+                    <a class="nav-link" href="mensagens.html">
+                        <i class="bi bi-envelope"></i> Mensagens
+                    </a>
+                    <a class="nav-link" href="meus-itens.html">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </a>
+                </nav>
+                
+                <div class="user-profile">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center" 
+                             style="width: 40px; height: 40px; color: #198754;">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="ms-2">
+                            <div class="small fw-bold" id="user-name">Carregando...</div>
+                            <div class="small" style="opacity: 0.8;" id="user-email"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                <div class="d-flex align-items-center mb-4">
+                    <a href="meus-itens.html" class="text-decoration-none me-3">
+                        <i class="bi bi-arrow-left fs-4 text-success"></i>
+                    </a>
+                    <h1 class="mb-0">Editar Item de Doação</h1>
+                </div>
+                
+                <!-- Alert Container -->
+                <div id="alert-container"></div>
+                
+                <!-- Loading -->
+                <div class="text-center py-5" id="loading">
+                    <div class="spinner-border text-success" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                    <p class="mt-3 text-muted">Carregando dados do item...</p>
+                </div>
+                
+                <!-- Form -->
+                <form id="form-editar-item" class="d-none">
+                    <!-- Detalhes do Item -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="bi bi-info-circle"></i> Detalhes do Item
+                        </h3>
+                        <p class="text-muted mb-4">
+                            Informações básicas sobre o item que você está doando.
+                        </p>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="item-nome" class="form-label">Nome do Item *</label>
+                                <input type="text" class="form-control" id="item-nome" 
+                                       required minlength="3">
+                                <div class="invalid-feedback">
+                                    O nome deve ter no mínimo 3 caracteres.
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3 mb-3">
+                                <label for="item-categoria" class="form-label">Categoria *</label>
+                                <select class="form-select" id="item-categoria" required>
+                                    <option value="">Selecione</option>
+                                    <option value="Móveis">Móveis</option>
+                                    <option value="Roupas">Roupas</option>
+                                    <option value="Eletrônicos">Eletrônicos</option>
+                                    <option value="Livros">Livros</option>
+                                    <option value="Brinquedos">Brinquedos</option>
+                                    <option value="Outros">Outros</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Selecione uma categoria.
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3 mb-3">
+                                <label for="item-condicao" class="form-label">Condição *</label>
+                                <select class="form-select" id="item-condicao" required>
+                                    <option value="">Selecione</option>
+                                    <option value="Novo">Novo</option>
+                                    <option value="Usado - Ótimo">Usado - Ótimo</option>
+                                    <option value="Usado - Bom">Usado - Bom</option>
+                                    <option value="Precisa Reparo">Precisa Reparo</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Selecione a condição.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="item-descricao" class="form-label">Descrição Detalhada *</label>
+                            <textarea class="form-control" id="item-descricao" rows="5" 
+                                      required minlength="10"></textarea>
+                            <div class="invalid-feedback">
+                                A descrição deve ter no mínimo 10 caracteres.
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="item-localizacao" class="form-label">Localização *</label>
+                            <input type="text" class="form-control" id="item-localizacao" 
+                                   required minlength="3">
+                            <small class="text-muted">Ex: Fortaleza, CE - Bairro Aldeota</small>
+                            <div class="invalid-feedback">
+                                Informe a localização.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fotos do Item -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="bi bi-images"></i> Fotos do Item (até 3 fotos)
+                        </h3>
+                        <p class="text-muted mb-4">
+                            Atualize as fotos do seu item. Você pode ter até 3 fotos.
+                        </p>
+                        
+                        <!-- Upload de Arquivos -->
+                        <div class="mb-3">
+                            <label for="item-images-file" class="form-label">
+                                <i class="bi bi-upload"></i> Adicionar Novas Fotos
+                            </label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="item-images-file" 
+                                       accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
+                                       multiple>
+                                <label class="input-group-text btn btn-outline-success" for="item-images-file" style="cursor: pointer;">
+                                    <i class="bi bi-folder2-open"></i> Escolher Fotos
+                                </label>
+                            </div>
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle"></i> Você pode selecionar até 3 fotos. Formatos: JPG, PNG, GIF, WEBP (Máx. 5MB cada)
+                            </small>
+                        </div>
+                        
+                        <!-- URLs de Imagem -->
+                        <div class="mb-3">
+                            <label for="item-image-urls" class="form-label">
+                                <i class="bi bi-link-45deg"></i> Ou cole URLs de imagens (uma por linha, até 3)
+                            </label>
+                            <textarea class="form-control" id="item-image-urls" rows="3"
+                                   placeholder="https://exemplo.com/foto1.jpg&#10;https://exemplo.com/foto2.jpg"></textarea>
+                            <small class="text-muted">Cole uma URL por linha</small>
+                        </div>
+                        
+                        <!-- Preview das Imagens -->
+                        <div class="image-preview-container" id="image-preview-container">
+                            <!-- Previews serão inseridos aqui -->
+                        </div>
+                    </div>
+                    
+                    <!-- Status e Disponibilidade -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="bi bi-toggle-on"></i> Status e Disponibilidade
+                        </h3>
+                        <p class="text-muted mb-4">
+                            Controle a visibilidade do seu item na plataforma.
+                        </p>
+                        
+                        <div class="status-toggle">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="status-toggle" 
+                                       style="width: 50px; height: 25px;">
+                                <label class="form-check-label ms-3" for="status-toggle">
+                                    <strong>Item Disponível para Doação</strong>
+                                    <br>
+                                    <small class="text-muted">Visível para outros usuários buscando itens.</small>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <label for="item-status" class="form-label">Status Atual *</label>
+                            <select class="form-select" id="item-status" required>
+                                <option value="available">Disponível</option>
+                                <option value="reserved">Reservado</option>
+                                <option value="donated">Doado</option>
+                            </select>
+                            <small class="text-muted">
+                                <strong>Disponível:</strong> Item está disponível para doação<br>
+                                <strong>Reservado:</strong> Item foi reservado por alguém<br>
+                                <strong>Doado:</strong> Item já foi doado
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Botões -->
+                    <div class="d-flex gap-3 justify-content-end">
+                        <a href="meus-itens.html" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <span class="btn-text">
+                                <i class="bi bi-check-circle"></i> Salvar Alterações
+                            </span>
+                            <span class="spinner-border spinner-border-sm d-none ms-2" role="status">
+                                <span class="visually-hidden">Carregando...</span>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <!-- Footer Moderno -->
+    <footer class="footer-modern mt-5" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important; background-color: #1a1a1a !important; color: #ffffff !important;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Logo e Descrição -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand mb-3">
+                        <h4 class="fw-bold text-white mb-2">
+                            <i class="bi bi-heart-fill text-success"></i> Conecta Doações
+                        </h4>
+                        <p class="text-white-50 mb-3">
+                            Conectando doadores e beneficiários em comunidades locais, promovendo a economia circular e reduzindo o desperdício.
+                        </p>
+                        <div class="footer-ods-badge">
+                            <span class="badge bg-success px-3 py-2">
+                                <i class="bi bi-globe"></i> ODS 11 - Cidades Sustentáveis
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-link-45deg"></i> Links Rápidos
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-house me-2"></i> Início
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="login.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Entrar
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="como-funciona.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-question-circle me-2"></i> Como Funciona
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="sobre.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-info-circle me-2"></i> Sobre
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Navegação -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-compass"></i> Navegação
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-search me-2"></i> Buscar Doações
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="nova-doacao.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-plus-circle me-2"></i> Doar Item
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="meus-itens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box me-2"></i> Meus Itens
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="mensagens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-envelope me-2"></i> Mensagens
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ODS 11 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-globe-americas"></i> Objetivos ODS
+                    </h6>
+                    <div class="footer-ods-content">
+                        <p class="text-white-50 small mb-3">
+                            Contribuímos para o <strong class="text-white">ODS 11</strong> - Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.
+                        </p>
+                        <div class="footer-social">
+                            <p class="text-white-50 small mb-2">Conecte-se conosco:</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-light text-dark">Sustentabilidade</span>
+                                <span class="badge bg-light text-dark">Comunidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <hr class="footer-divider my-4">
+            
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <p class="text-white-50 small mb-2 mb-md-0">
+                            &copy; 2025 <strong class="text-white">Conecta Doações</strong>. Todos os direitos reservados.
+                        </p>
+                        <p class="text-white-50 small mb-0">
+                            MVP - Etapa 2 (N708) | Desenvolvido com <i class="bi bi-heart-fill text-danger"></i> para comunidades sustentáveis
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase e Lógica -->
+    <script type="module">
+        import { auth, getCurrentUser, getUserData } from './js/auth.js';
+        import { getDonationById, updateDonation } from './js/donations.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        // ========================================
+        // OBTER ID DO ITEM DA URL
+        // ========================================
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const donationId = urlParams.get('id');
+
+        if (!donationId) {
+            alert('ID do item não encontrado. Redirecionando...');
+            window.location.href = 'meus-itens.html';
+        }
+
+        // ========================================
+        // VERIFICAR AUTENTICAÇÃO
+        // ========================================
+        
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                alert('Você precisa estar logado para editar um item.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Carregar dados do usuário
+            const userData = await getUserData(user.uid);
+            if (userData.success) {
+                document.getElementById('user-name').textContent = userData.data.name || user.displayName;
+                document.getElementById('user-email').textContent = user.email;
+            }
+            
+            // Carregar dados do item
+            loadDonationData();
+        });
+
+        // ========================================
+        // FUNÇÕES AUXILIARES
+        // ========================================
+
+        function showAlert(message, type = 'danger') {
+            const alertContainer = document.getElementById('alert-container');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alert);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        function toggleLoading(button, isLoading) {
+            const spinner = button.querySelector('.spinner-border');
+            const text = button.querySelector('.btn-text');
+            
+            if (isLoading) {
+                button.disabled = true;
+                spinner.classList.remove('d-none');
+                text.innerHTML = '<i class="bi bi-hourglass-split"></i> Salvando...';
+            } else {
+                button.disabled = false;
+                spinner.classList.add('d-none');
+                text.innerHTML = '<i class="bi bi-check-circle"></i> Salvar Alterações';
+            }
+        }
+
+        function validateForm(form) {
+            form.classList.add('was-validated');
+            return form.checkValidity();
+        }
+
+        // ========================================
+        // CARREGAR DADOS DO ITEM
+        // ========================================
+
+        async function loadDonationData() {
+            const loading = document.getElementById('loading');
+            const form = document.getElementById('form-editar-item');
+            const user = getCurrentUser();
+
+            try {
+                const result = await getDonationById(donationId);
+
+                if (!result.success) {
+                    showAlert('Item não encontrado ou você não tem permissão para editá-lo.', 'danger');
+                    setTimeout(() => {
+                        window.location.href = 'meus-itens.html';
+                    }, 2000);
+                    return;
+                }
+
+                const donation = result.data;
+
+                // Verificar se o item pertence ao usuário
+                if (donation.userId !== user.uid) {
+                    showAlert('Você não tem permissão para editar este item.', 'danger');
+                    setTimeout(() => {
+                        window.location.href = 'meus-itens.html';
+                    }, 2000);
+                    return;
+                }
+
+                // Preencher formulário
+                document.getElementById('item-nome').value = donation.title || '';
+                document.getElementById('item-descricao').value = donation.description || '';
+                document.getElementById('item-categoria').value = donation.category || '';
+                document.getElementById('item-condicao').value = donation.condition || '';
+                document.getElementById('item-localizacao').value = donation.location || '';
+                // Obter array de imagens
+                const imageUrls = donation.imageUrls || (donation.imageUrl ? [donation.imageUrl] : []);
+                document.getElementById('item-image-urls').value = imageUrls.join('\n');
+                document.getElementById('item-status').value = donation.status || 'available';
+
+                // Atualizar toggle de disponibilidade
+                const statusToggle = document.getElementById('status-toggle');
+                statusToggle.checked = donation.status === 'available';
+
+                // Mostrar preview das imagens
+                if (imageUrls.length > 0) {
+                    selectedImageUrls = imageUrls;
+                    updateImagePreviews();
+                }
+
+                // Esconder loading e mostrar form
+                loading.classList.add('d-none');
+                form.classList.remove('d-none');
+
+            } catch (error) {
+                console.error('Erro ao carregar item:', error);
+                showAlert('Erro ao carregar dados do item. Tente novamente.', 'danger');
+                loading.classList.add('d-none');
+            }
+        }
+
+        // ========================================
+        // PREVIEW DE MÚLTIPLAS IMAGENS
+        // ========================================
+
+        let selectedFiles = [];
+        let selectedImageUrls = [];
+        const MAX_IMAGES = 3;
+
+        // Event listener para seleção de múltiplos arquivos
+        const fileInput = document.getElementById('item-images-file');
+        if (fileInput) {
+            fileInput.addEventListener('change', function(event) {
+                const files = Array.from(event.target.files);
+                
+                if (files.length === 0) return;
+
+                // Validar quantidade máxima
+                const totalImages = selectedImageUrls.length + files.length;
+                if (totalImages > MAX_IMAGES) {
+                    showAlert(`Você pode ter no máximo ${MAX_IMAGES} fotos. Remova algumas antes de adicionar novas.`, 'warning');
+                    event.target.value = '';
+                    return;
+                }
+
+                // Validar cada arquivo
+                const validFiles = [];
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    if (file.size > 5 * 1024 * 1024) {
+                        showAlert(`A imagem "${file.name}" excede 5MB.`, 'warning');
+                        continue;
+                    }
+
+                    if (!file.type.startsWith('image/')) {
+                        showAlert(`O arquivo "${file.name}" não é uma imagem válida.`, 'warning');
+                        continue;
+                    }
+
+                    validFiles.push(file);
+                }
+
+                selectedFiles = [...selectedFiles, ...validFiles].slice(0, MAX_IMAGES - selectedImageUrls.length);
+                document.getElementById('item-image-urls').value = selectedImageUrls.join('\n');
+                updateImagePreviews();
+            });
+        }
+
+        // Event listener para URLs de imagem
+        const urlInput = document.getElementById('item-image-urls');
+        if (urlInput) {
+            urlInput.addEventListener('input', function(event) {
+                const urlsText = event.target.value.trim();
+                
+                const urls = urlsText.split('\n')
+                    .map(url => url.trim())
+                    .filter(url => url && isValidImageUrl(url))
+                    .slice(0, MAX_IMAGES);
+                
+                selectedImageUrls = urls;
+                updateImagePreviews();
+            });
+        }
+
+        function updateImagePreviews() {
+            const container = document.getElementById('image-preview-container');
+            container.innerHTML = '';
+
+            const allImages = [];
+            let filesLoaded = 0;
+
+            // Adicionar previews de arquivos
+            if (selectedFiles.length > 0) {
+                selectedFiles.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        allImages.push({
+                            type: 'file',
+                            src: e.target.result,
+                            file: file,
+                            index: index
+                        });
+                        filesLoaded++;
+                        if (filesLoaded === selectedFiles.length) {
+                            renderPreviews();
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Adicionar previews de URLs
+            selectedImageUrls.forEach((url, index) => {
+                allImages.push({
+                    type: 'url',
+                    src: url,
+                    index: selectedFiles.length + index
+                });
+            });
+
+            function renderPreviews() {
+                const imagesToShow = [...allImages];
+                selectedImageUrls.forEach((url, idx) => {
+                    if (!allImages.find(img => img.src === url)) {
+                        imagesToShow.push({
+                            type: 'url',
+                            src: url,
+                            index: selectedFiles.length + idx
+                        });
+                    }
+                });
+
+                imagesToShow.forEach((img, idx) => {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'image-preview-item';
+                    previewItem.innerHTML = `
+                        <img src="${img.src}" alt="Preview ${idx + 1}">
+                        <button type="button" class="remove-btn" data-index="${img.index}" data-type="${img.type}">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    `;
+                    container.appendChild(previewItem);
+                });
+
+                // Event listeners para remover
+                container.querySelectorAll('.remove-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        const type = this.dataset.type;
+                        
+                        if (type === 'file') {
+                            selectedFiles.splice(index, 1);
+                            document.getElementById('item-images-file').value = '';
+                        } else {
+                            selectedImageUrls.splice(index - selectedFiles.length, 1);
+                            document.getElementById('item-image-urls').value = selectedImageUrls.join('\n');
+                        }
+                        
+                        updateImagePreviews();
+                    });
+                });
+            }
+
+            if (selectedFiles.length === 0) {
+                renderPreviews();
+            }
+        }
+
+        function isValidImageUrl(url) {
+            return url.match(/\.(jpeg|jpg|gif|png|webp)$/i) || url.startsWith('http');
+        }
+
+        // ========================================
+        // SUBMIT FORM
+        // ========================================
+
+        const form = document.getElementById('form-editar-item');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!validateForm(form)) {
+                showAlert('Por favor, preencha todos os campos obrigatórios corretamente.', 'warning');
+                return;
+            }
+
+            const user = getCurrentUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const updateData = {
+                title: document.getElementById('item-nome').value.trim(),
+                description: document.getElementById('item-descricao').value.trim(),
+                category: document.getElementById('item-categoria').value,
+                condition: document.getElementById('item-condicao').value,
+                location: document.getElementById('item-localizacao').value.trim(),
+                status: document.getElementById('item-status').value
+            };
+
+            // Atualizar imagens
+            let imageUrls = [];
+            
+            // Se há arquivos selecionados, fazer upload
+            if (selectedFiles.length > 0) {
+                const { storage } = await import('./js/firebase-config.js');
+                const { ref, uploadBytes, getDownloadURL } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js');
+                
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    const file = selectedFiles[i];
+                    try {
+                        if (storage) {
+                            const fileName = `donations/${user.uid}/${Date.now()}_${i}_${file.name}`;
+                            const storageRef = ref(storage, fileName);
+                            await uploadBytes(storageRef, file);
+                            const url = await getDownloadURL(storageRef);
+                            imageUrls.push(url);
+                        }
+                    } catch (error) {
+                        console.error(`Erro ao fazer upload da imagem ${i + 1}:`, error);
+                    }
+                }
+            }
+            
+            // Adicionar URLs existentes e novas
+            imageUrls = [...imageUrls, ...selectedImageUrls];
+            
+            if (imageUrls.length > 0) {
+                updateData.imageUrls = imageUrls;
+                updateData.imageUrl = imageUrls[0]; // Compatibilidade
+            }
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            toggleLoading(submitBtn, true);
+
+            try {
+                const result = await updateDonation(donationId, updateData);
+
+                if (result.success) {
+                    showAlert('Item atualizado com sucesso! Redirecionando...', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'meus-itens.html';
+                    }, 1500);
+                } else {
+                    showAlert(result.error || 'Erro ao atualizar item. Tente novamente.', 'danger');
+                    toggleLoading(submitBtn, false);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                showAlert('Erro ao atualizar item. Tente novamente.', 'danger');
+                toggleLoading(submitBtn, false);
+            }
+        });
+    </script>
+</body>
+</html>
+

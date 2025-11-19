@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detalhes do Item - Conecta Doações">
+    <title>Detalhes do Item - Conecta Doações</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        .item-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .image-gallery {
+            position: relative;
+        }
+        
+        .gallery-main {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            background: #f8f9fa;
+        }
+        
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .gallery-thumbnail {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .gallery-thumbnail:hover {
+            border-color: #198754;
+            transform: scale(1.05);
+        }
+        
+        .gallery-thumbnail.active {
+            border-color: #198754;
+        }
+        
+        .gallery-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .gallery-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .gallery-nav.prev {
+            left: 10px;
+        }
+        
+        .gallery-nav.next {
+            right: 10px;
+        }
+        
+        .gallery-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .badge-custom {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-success" href="index.html">
+                <i class="bi bi-heart-fill"></i> Conecta Doações
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="bi bi-house"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="nav-meus-itens">
+                        <a class="nav-link" href="meus-itens.html">
+                            <i class="bi bi-box"></i> Meus Itens
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="nav-mensagens">
+                        <a class="nav-link" href="mensagens.html">
+                            <i class="bi bi-envelope"></i> Mensagens
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="nav-perfil">
+                        <a class="nav-link" href="perfil.html">
+                            <i class="bi bi-person"></i> Perfil
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="nav-logout">
+                        <a class="nav-link" href="#" id="btn-logout">
+                            <i class="bi bi-box-arrow-right"></i> Sair
+                        </a>
+                    </li>
+                    <li class="nav-item" id="nav-login">
+                        <a class="nav-link" href="login.html">
+                            <i class="bi bi-box-arrow-in-right"></i> Entrar
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <!-- Loading -->
+        <div class="text-center py-5" id="loading">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Carregando...</span>
+            </div>
+            <p class="mt-3 text-muted">Carregando detalhes do item...</p>
+        </div>
+        
+        <!-- Alert Container -->
+        <div id="alert-container"></div>
+        
+        <!-- Item Details -->
+        <div id="item-details" class="d-none">
+            <div class="row">
+                <!-- Galeria de Imagens -->
+                <div class="col-md-6 mb-4">
+                    <div class="image-gallery">
+                        <div class="gallery-main" id="gallery-main">
+                            <img id="item-image-main" 
+                                 src="https://via.placeholder.com/500x500?text=Carregando..." 
+                                 alt="Item">
+                            <button class="gallery-nav prev" id="gallery-prev" style="display: none;">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <button class="gallery-nav next" id="gallery-next" style="display: none;">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="gallery-thumbnails" id="gallery-thumbnails" style="display: none;">
+                            <!-- Thumbnails serão inseridos aqui -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Informações -->
+                <div class="col-md-6">
+                    <div class="info-card">
+                        <h1 id="item-title" class="mb-3"></h1>
+                        
+                        <div class="mb-3">
+                            <span id="item-status-badge" class="badge badge-custom mb-2"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <strong><i class="bi bi-tag"></i> Categoria:</strong>
+                            <span id="item-category" class="badge bg-primary ms-2"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <strong><i class="bi bi-star"></i> Condição:</strong>
+                            <span id="item-condition" class="badge bg-info ms-2"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <strong><i class="bi bi-geo-alt"></i> Localização:</strong>
+                            <span id="item-location" class="ms-2"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <strong><i class="bi bi-person"></i> Doador:</strong>
+                            <span id="item-donor" class="ms-2"></span>
+                        </div>
+                        
+                        <hr>
+                        
+                        <h5 class="mb-3">Descrição</h5>
+                        <p id="item-description" class="text-muted"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Formulário de Mensagem -->
+            <div class="info-card" id="message-form-container">
+                <h4 class="mb-3">
+                    <i class="bi bi-envelope"></i> Enviar Mensagem ao Doador
+                </h4>
+                
+                <div id="login-required" class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> 
+                    Você precisa estar logado para enviar uma mensagem. 
+                    <a href="login.html" class="alert-link">Faça login aqui</a>.
+                </div>
+                
+                <div id="owner-warning" class="alert alert-warning d-none">
+                    <i class="bi bi-exclamation-triangle"></i> 
+                    <strong>Este é o seu próprio item.</strong> Você não pode enviar mensagem para si mesmo. 
+                    Se deseja editar este item, acesse <a href="meus-itens.html" class="alert-link">Meus Itens</a>.
+                </div>
+                
+                <form id="form-mensagem" class="d-none">
+                    <div class="mb-3">
+                        <label for="mensagem-texto" class="form-label">Sua Mensagem *</label>
+                        <textarea class="form-control" id="mensagem-texto" rows="4" 
+                                  placeholder="Ex: Olá! Tenho interesse neste item. Ainda está disponível?" 
+                                  required minlength="10"></textarea>
+                        <div class="invalid-feedback">
+                            A mensagem deve ter no mínimo 10 caracteres.
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">
+                        <span class="btn-text">
+                            <i class="bi bi-send"></i> Enviar Mensagem
+                        </span>
+                        <span class="spinner-border spinner-border-sm d-none ms-2" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Item Not Found -->
+        <div id="item-not-found" class="text-center py-5 d-none">
+            <i class="bi bi-exclamation-triangle" style="font-size: 64px; color: #ffc107;"></i>
+            <h3 class="mt-3">Item não encontrado</h3>
+            <p class="text-muted">O item que você está procurando não existe ou foi removido.</p>
+            <a href="index.html" class="btn btn-success">
+                <i class="bi bi-arrow-left"></i> Voltar para Início
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer Moderno -->
+    <footer class="footer-modern mt-5" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important; background-color: #1a1a1a !important; color: #ffffff !important;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Logo e Descrição -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand mb-3">
+                        <h4 class="fw-bold text-white mb-2">
+                            <i class="bi bi-heart-fill text-success"></i> Conecta Doações
+                        </h4>
+                        <p class="text-white-50 mb-3">
+                            Conectando doadores e beneficiários em comunidades locais, promovendo a economia circular e reduzindo o desperdício.
+                        </p>
+                        <div class="footer-ods-badge">
+                            <span class="badge bg-success px-3 py-2">
+                                <i class="bi bi-globe"></i> ODS 11 - Cidades Sustentáveis
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-link-45deg"></i> Links Rápidos
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-house me-2"></i> Início
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="login.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Entrar
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="como-funciona.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-question-circle me-2"></i> Como Funciona
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="sobre.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-info-circle me-2"></i> Sobre
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Navegação -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-compass"></i> Navegação
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-search me-2"></i> Buscar Doações
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="nova-doacao.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-plus-circle me-2"></i> Doar Item
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="meus-itens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box me-2"></i> Meus Itens
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="mensagens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-envelope me-2"></i> Mensagens
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ODS 11 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-globe-americas"></i> Objetivos ODS
+                    </h6>
+                    <div class="footer-ods-content">
+                        <p class="text-white-50 small mb-3">
+                            Contribuímos para o <strong class="text-white">ODS 11</strong> - Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.
+                        </p>
+                        <div class="footer-social">
+                            <p class="text-white-50 small mb-2">Conecte-se conosco:</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-light text-dark">Sustentabilidade</span>
+                                <span class="badge bg-light text-dark">Comunidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <hr class="footer-divider my-4">
+            
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <p class="text-white-50 small mb-2 mb-md-0">
+                            &copy; 2025 <strong class="text-white">Conecta Doações</strong>. Todos os direitos reservados.
+                        </p>
+                        <p class="text-white-50 small mb-0">
+                            MVP - Etapa 2 (N708) | Desenvolvido com <i class="bi bi-heart-fill text-danger"></i> para comunidades sustentáveis
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase e Lógica -->
+    <script type="module">
+        import { auth, getCurrentUser, checkAuthState, signOutUser } from './js/auth.js';
+        import { getDonationById } from './js/donations.js';
+        import { sendMessage } from './js/messages.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        // ========================================
+        // OBTER ID DO ITEM DA URL
+        // ========================================
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const donationId = urlParams.get('id');
+
+        if (!donationId) {
+            document.getElementById('loading').classList.add('d-none');
+            document.getElementById('item-not-found').classList.remove('d-none');
+        }
+
+        // ========================================
+        // VERIFICAR AUTENTICAÇÃO E CARREGAR ITEM
+        // ========================================
+        
+        checkAuthState();
+        
+        onAuthStateChanged(auth, (user) => {
+            if (donationId) {
+                loadDonationDetails();
+            }
+        });
+
+        // ========================================
+        // FUNÇÕES AUXILIARES
+        // ========================================
+
+        function showAlert(message, type = 'danger') {
+            const alertContainer = document.getElementById('alert-container');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alert);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        function getStatusBadge(status) {
+            const badges = {
+                'available': '<span class="badge bg-success badge-custom">Disponível</span>',
+                'reserved': '<span class="badge bg-warning badge-custom">Reservado</span>',
+                'donated': '<span class="badge bg-secondary badge-custom">Doado</span>'
+            };
+            return badges[status] || badges['available'];
+        }
+
+        // ========================================
+        // GALERIA DE IMAGENS
+        // ========================================
+
+        let currentImageIndex = 0;
+        let imageUrls = [];
+
+        function setupImageGallery(donation) {
+            // Obter array de imagens (suporta imageUrls ou imageUrl)
+            imageUrls = donation.imageUrls || (donation.imageUrl ? [donation.imageUrl] : ['https://via.placeholder.com/500x500?text=Sem+Imagem']);
+            
+            if (imageUrls.length === 0) {
+                imageUrls = ['https://via.placeholder.com/500x500?text=Sem+Imagem'];
+            }
+
+            // Mostrar primeira imagem
+            currentImageIndex = 0;
+            updateMainImage();
+
+            // Se há múltiplas imagens, mostrar navegação e thumbnails
+            if (imageUrls.length > 1) {
+                document.getElementById('gallery-prev').style.display = 'flex';
+                document.getElementById('gallery-next').style.display = 'flex';
+                document.getElementById('gallery-thumbnails').style.display = 'flex';
+                
+                // Criar thumbnails
+                const thumbnailsContainer = document.getElementById('gallery-thumbnails');
+                thumbnailsContainer.innerHTML = '';
+                
+                imageUrls.forEach((url, index) => {
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = `gallery-thumbnail ${index === 0 ? 'active' : ''}`;
+                    thumbnail.innerHTML = `<img src="${url}" alt="Imagem ${index + 1}">`;
+                    thumbnail.addEventListener('click', () => {
+                        currentImageIndex = index;
+                        updateMainImage();
+                    });
+                    thumbnailsContainer.appendChild(thumbnail);
+                });
+
+                // Event listeners para navegação
+                document.getElementById('gallery-prev').addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
+                    updateMainImage();
+                });
+
+                document.getElementById('gallery-next').addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
+                    updateMainImage();
+                });
+            } else {
+                document.getElementById('gallery-prev').style.display = 'none';
+                document.getElementById('gallery-next').style.display = 'none';
+                document.getElementById('gallery-thumbnails').style.display = 'none';
+            }
+        }
+
+        function updateMainImage() {
+            const mainImage = document.getElementById('item-image-main');
+            mainImage.src = imageUrls[currentImageIndex];
+            mainImage.alt = `Imagem ${currentImageIndex + 1} de ${imageUrls.length}`;
+
+            // Atualizar thumbnails ativos
+            const thumbnails = document.querySelectorAll('.gallery-thumbnail');
+            thumbnails.forEach((thumb, index) => {
+                if (index === currentImageIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+
+            // Atualizar botões de navegação
+            document.getElementById('gallery-prev').disabled = imageUrls.length <= 1;
+            document.getElementById('gallery-next').disabled = imageUrls.length <= 1;
+        }
+
+        // ========================================
+        // CARREGAR DETALHES DO ITEM
+        // ========================================
+
+        async function loadDonationDetails() {
+            const loading = document.getElementById('loading');
+            const itemDetails = document.getElementById('item-details');
+            const itemNotFound = document.getElementById('item-not-found');
+
+            try {
+                const result = await getDonationById(donationId);
+
+                if (!result.success) {
+                    loading.classList.add('d-none');
+                    itemNotFound.classList.remove('d-none');
+                    return;
+                }
+
+                const donation = result.data;
+
+                // Preencher dados
+                document.getElementById('item-title').textContent = donation.title;
+                document.getElementById('item-category').textContent = donation.category;
+                document.getElementById('item-condition').textContent = donation.condition;
+                document.getElementById('item-location').textContent = donation.location;
+                document.getElementById('item-donor').textContent = donation.userName || 'Anônimo';
+                document.getElementById('item-description').textContent = donation.description;
+                document.getElementById('item-status-badge').innerHTML = getStatusBadge(donation.status);
+
+                // Configurar galeria de imagens
+                setupImageGallery(donation);
+
+                // Configurar formulário de mensagem baseado no usuário e dono do item
+                setupMessageForm(donation);
+
+                // Esconder loading e mostrar detalhes
+                loading.classList.add('d-none');
+                itemDetails.classList.remove('d-none');
+
+            } catch (error) {
+                console.error('Erro ao carregar item:', error);
+                loading.classList.add('d-none');
+                itemNotFound.classList.remove('d-none');
+            }
+        }
+
+        // ========================================
+        // CONFIGURAR FORMULÁRIO DE MENSAGEM
+        // ========================================
+
+        function setupMessageForm(donation) {
+            const user = getCurrentUser();
+            const loginRequired = document.getElementById('login-required');
+            const messageForm = document.getElementById('form-mensagem');
+            const ownerWarning = document.getElementById('owner-warning');
+
+            if (user && donation) {
+                // Verificar se é o dono do item
+                if (user.uid === donation.userId) {
+                    // É o dono - mostrar aviso e esconder formulário
+                    if (loginRequired) loginRequired.classList.add('d-none');
+                    if (messageForm) messageForm.classList.add('d-none');
+                    if (ownerWarning) ownerWarning.classList.remove('d-none');
+                } else {
+                    // Não é o dono - mostrar formulário
+                    if (loginRequired) loginRequired.classList.add('d-none');
+                    if (messageForm) messageForm.classList.remove('d-none');
+                    if (ownerWarning) ownerWarning.classList.add('d-none');
+                }
+            } else {
+                // Usuário não logado
+                if (loginRequired) loginRequired.classList.remove('d-none');
+                if (messageForm) messageForm.classList.add('d-none');
+                if (ownerWarning) ownerWarning.classList.add('d-none');
+            }
+        }
+
+        // ========================================
+        // ENVIAR MENSAGEM
+        // ========================================
+
+        const formMensagem = document.getElementById('form-mensagem');
+        formMensagem.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const user = getCurrentUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            if (!formMensagem.checkValidity()) {
+                formMensagem.classList.add('was-validated');
+                return;
+            }
+
+            // Buscar dados do item novamente para obter receiverId
+            const itemResult = await getDonationById(donationId);
+            if (!itemResult.success) {
+                showAlert('Erro ao enviar mensagem. Item não encontrado.', 'danger');
+                return;
+            }
+
+            const donation = itemResult.data;
+            const messageText = document.getElementById('mensagem-texto').value.trim();
+            const submitBtn = formMensagem.querySelector('button[type="submit"]');
+            const spinner = submitBtn.querySelector('.spinner-border');
+            const text = submitBtn.querySelector('.btn-text');
+
+            // Loading
+            submitBtn.disabled = true;
+            spinner.classList.remove('d-none');
+            text.innerHTML = '<i class="bi bi-hourglass-split"></i> Enviando...';
+
+            try {
+                // Verificar se não é o dono do item
+                const currentUser = getCurrentUser();
+                if (currentUser && currentUser.uid === donation.userId) {
+                    showAlert('Você não pode enviar mensagem para seu próprio item.', 'warning');
+                    return;
+                }
+
+                const result = await sendMessage(donationId, donation.userId, messageText);
+
+                if (result.success) {
+                    showAlert('Mensagem enviada com sucesso! O doador receberá sua mensagem.', 'success');
+                    formMensagem.reset();
+                    formMensagem.classList.remove('was-validated');
+                } else {
+                    showAlert(result.error || 'Erro ao enviar mensagem. Tente novamente.', 'danger');
+                }
+            } catch (error) {
+                console.error('Erro ao enviar mensagem:', error);
+                showAlert('Erro ao enviar mensagem. Tente novamente.', 'danger');
+            } finally {
+                submitBtn.disabled = false;
+                spinner.classList.add('d-none');
+                text.innerHTML = '<i class="bi bi-send"></i> Enviar Mensagem';
+            }
+        });
+
+        // ========================================
+        // LOGOUT
+        // ========================================
+
+        const btnLogout = document.getElementById('btn-logout');
+        if (btnLogout) {
+            btnLogout.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const result = await signOutUser();
+                if (result.success) {
+                    window.location.href = 'index.html';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

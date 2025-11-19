@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Editar Perfil - Conecta Doações">
+    <title>Meu Perfil - Conecta Doações</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, #198754 0%, #157347 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 30px 20px;
+            position: sticky;
+            top: 0;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .user-profile {
+            margin-top: auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .main-content {
+            padding: 40px;
+        }
+        
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #198754 0%, #157347 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        
+        .profile-info h4 {
+            margin: 0;
+            color: #333;
+        }
+        
+        .profile-info p {
+            margin: 5px 0 0 0;
+            color: #666;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-section h5 {
+            color: #198754;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .tips-box {
+            background: #f8f9fa;
+            border-left: 4px solid #198754;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+        
+        .tips-box h6 {
+            color: #198754;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar d-flex flex-column">
+                <div class="logo">
+                    <i class="bi bi-heart-fill"></i> Conecta Doações
+                    <div class="small mt-2" style="opacity: 0.9;">
+                        Juntos por um Futuro Sustentável
+                    </div>
+                </div>
+                
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i> Início
+                    </a>
+                    <a class="nav-link" href="meus-itens.html">
+                        <i class="bi bi-box"></i> Meus Itens
+                    </a>
+                    <a class="nav-link" href="nova-doacao.html">
+                        <i class="bi bi-plus-circle"></i> Nova Doação
+                    </a>
+                    <a class="nav-link" href="mensagens.html">
+                        <i class="bi bi-envelope"></i> Mensagens
+                    </a>
+                    <a class="nav-link active" href="perfil.html">
+                        <i class="bi bi-person"></i> Meu Perfil
+                    </a>
+                    <a class="nav-link" href="#" id="btn-logout-sidebar">
+                        <i class="bi bi-box-arrow-right"></i> Sair
+                    </a>
+                </nav>
+                
+                <div class="user-profile">
+                    <div class="text-center">
+                        <div class="small" style="opacity: 0.8;">
+                            <i class="bi bi-person-circle"></i>
+                            <div id="user-name-sidebar" class="mt-2">Carregando...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold">
+                        <i class="bi bi-person-gear"></i> Meu Perfil
+                    </h2>
+                </div>
+                
+                <!-- Alert Container -->
+                <div id="alert-container"></div>
+                
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="profile-avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h4 id="profile-name">Carregando...</h4>
+                            <p id="profile-email">Carregando...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Formulário de Edição -->
+                    <form id="form-perfil" novalidate>
+                        <!-- Seção: Informações Pessoais -->
+                        <div class="form-section">
+                            <h5>
+                                <i class="bi bi-person-circle"></i> Informações Pessoais
+                            </h5>
+                            
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="perfil-nome" class="form-label">Nome Completo *</label>
+                                    <input type="text" class="form-control" id="perfil-nome" 
+                                           placeholder="Seu nome completo" required minlength="3">
+                                    <div class="invalid-feedback">
+                                        O nome deve ter no mínimo 3 caracteres.
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12 mb-3">
+                                    <label for="perfil-email" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="perfil-email" 
+                                           placeholder="Seu e-mail" disabled>
+                                    <small class="text-muted">
+                                        <i class="bi bi-info-circle"></i> O e-mail não pode ser alterado.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Seção: Endereço -->
+                        <div class="form-section">
+                            <h5>
+                                <i class="bi bi-geo-alt"></i> Endereço
+                            </h5>
+                            
+                            <!-- CEP -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="perfil-cep" class="form-label">CEP *</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="perfil-cep" 
+                                               placeholder="00000-000" maxlength="9" required
+                                               pattern="[0-9]{5}-?[0-9]{3}">
+                                        <button type="button" class="btn btn-outline-primary" id="btn-buscar-cep-perfil">
+                                            <i class="bi bi-search"></i> Buscar
+                                        </button>
+                                    </div>
+                                    <small class="text-muted">Digite o CEP para preencher automaticamente</small>
+                                    <div class="invalid-feedback">
+                                        CEP inválido. Digite um CEP válido.
+                                    </div>
+                                    <div id="cep-loading-perfil" class="spinner-border spinner-border-sm text-primary d-none mt-2" role="status">
+                                        <span class="visually-hidden">Buscando...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Logradouro -->
+                            <div class="mb-3">
+                                <label for="perfil-logradouro" class="form-label">Logradouro (Rua/Avenida) *</label>
+                                <input type="text" class="form-control" id="perfil-logradouro" 
+                                       placeholder="Nome da rua ou avenida" required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe o logradouro.
+                                </div>
+                            </div>
+                            
+                            <!-- Número e Complemento -->
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="perfil-numero" class="form-label">Número *</label>
+                                    <input type="text" class="form-control" id="perfil-numero" 
+                                           placeholder="123" required>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe o número.
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <label for="perfil-complemento" class="form-label">Complemento</label>
+                                    <input type="text" class="form-control" id="perfil-complemento" 
+                                           placeholder="Apto, Bloco, etc. (opcional)">
+                                </div>
+                            </div>
+                            
+                            <!-- Bairro -->
+                            <div class="mb-3">
+                                <label for="perfil-bairro" class="form-label">Bairro *</label>
+                                <input type="text" class="form-control" id="perfil-bairro" 
+                                       placeholder="Nome do bairro" required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe o bairro.
+                                </div>
+                            </div>
+                            
+                            <!-- Cidade e UF -->
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <label for="perfil-cidade" class="form-label">Cidade *</label>
+                                    <input type="text" class="form-control" id="perfil-cidade" 
+                                           placeholder="Nome da cidade" required>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe a cidade.
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="perfil-uf" class="form-label">UF *</label>
+                                    <input type="text" class="form-control" id="perfil-uf" 
+                                           placeholder="CE" maxlength="2" required>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe a UF.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Botões -->
+                        <div class="d-flex gap-3 justify-content-end">
+                            <button type="button" class="btn btn-secondary" onclick="window.location.href='index.html'">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <span class="btn-text">
+                                    <i class="bi bi-check-circle"></i> Salvar Alterações
+                                </span>
+                                <span class="spinner-border spinner-border-sm d-none ms-2" role="status">
+                                    <span class="visually-hidden">Salvando...</span>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Tips Box -->
+                <div class="tips-box">
+                    <h6><i class="bi bi-info-circle"></i> Dicas</h6>
+                    <ul class="mb-0 small">
+                        <li>Seu endereço será usado automaticamente ao cadastrar novos itens para doação.</li>
+                        <li>Você pode atualizar seu endereço a qualquer momento.</li>
+                        <li>Use o botão "Buscar" ao lado do CEP para preencher automaticamente os campos.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Moderno -->
+    <footer class="footer-modern mt-5" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important; background-color: #1a1a1a !important; color: #ffffff !important;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Logo e Descrição -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand mb-3">
+                        <h4 class="fw-bold text-white mb-2">
+                            <i class="bi bi-heart-fill text-success"></i> Conecta Doações
+                        </h4>
+                        <p class="text-white-50 mb-3">
+                            Conectando doadores e beneficiários em comunidades locais, promovendo a economia circular e reduzindo o desperdício.
+                        </p>
+                        <div class="footer-ods-badge">
+                            <span class="badge bg-success px-3 py-2">
+                                <i class="bi bi-globe"></i> ODS 11 - Cidades Sustentáveis
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-link-45deg"></i> Links Rápidos
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-house me-2"></i> Início
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="login.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Entrar
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="como-funciona.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-question-circle me-2"></i> Como Funciona
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="sobre.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-info-circle me-2"></i> Sobre
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Navegação -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-compass"></i> Navegação
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-search me-2"></i> Buscar Doações
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="nova-doacao.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-plus-circle me-2"></i> Doar Item
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="meus-itens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box me-2"></i> Meus Itens
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="mensagens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-envelope me-2"></i> Mensagens
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ODS 11 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-globe-americas"></i> Objetivos ODS
+                    </h6>
+                    <div class="footer-ods-content">
+                        <p class="text-white-50 small mb-3">
+                            Contribuímos para o <strong class="text-white">ODS 11</strong> - Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.
+                        </p>
+                        <div class="footer-social">
+                            <p class="text-white-50 small mb-2">Conecte-se conosco:</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-light text-dark">Sustentabilidade</span>
+                                <span class="badge bg-light text-dark">Comunidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <hr class="footer-divider my-4">
+            
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <p class="text-white-50 small mb-2 mb-md-0">
+                            &copy; 2025 <strong class="text-white">Conecta Doações</strong>. Todos os direitos reservados.
+                        </p>
+                        <p class="text-white-50 small mb-0">
+                            MVP - Etapa 2 (N708) | Desenvolvido com <i class="bi bi-heart-fill text-danger"></i> para comunidades sustentáveis
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase Configuration and App Logic -->
+    <script type="module">
+        import { auth, getCurrentUser, getUserData, updateUserProfile, signOutUser } from './js/auth.js';
+        import { onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        
+        console.log('🚀 Script iniciado - perfil.html');
+        
+        // ========================================
+        // VERIFICAR AUTENTICAÇÃO
+        // ========================================
+        
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                alert('Você precisa estar logado para acessar seu perfil.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Carregar dados do usuário
+            await loadUserData(user);
+        });
+        
+        // ========================================
+        // CARREGAR DADOS DO USUÁRIO
+        // ========================================
+        
+        async function loadUserData(user) {
+            try {
+                const userData = await getUserData(user.uid);
+                
+                if (userData.success) {
+                    const data = userData.data;
+                    
+                    // Preencher informações pessoais
+                    document.getElementById('profile-name').textContent = data.name || user.displayName || 'Usuário';
+                    document.getElementById('profile-email').textContent = user.email;
+                    document.getElementById('user-name-sidebar').textContent = data.name || user.displayName || 'Usuário';
+                    document.getElementById('perfil-nome').value = data.name || user.displayName || '';
+                    document.getElementById('perfil-email').value = user.email;
+                    
+                    // Avatar inicial
+                    const avatar = document.getElementById('profile-avatar');
+                    const initials = (data.name || user.displayName || 'U').charAt(0).toUpperCase();
+                    avatar.innerHTML = `<span>${initials}</span>`;
+                    
+                    // Preencher endereço
+                    if (data.address) {
+                        const addr = data.address;
+                        document.getElementById('perfil-cep').value = addr.cep || '';
+                        document.getElementById('perfil-logradouro').value = addr.logradouro || '';
+                        document.getElementById('perfil-numero').value = addr.numero || '';
+                        document.getElementById('perfil-complemento').value = addr.complemento || '';
+                        document.getElementById('perfil-bairro').value = addr.bairro || '';
+                        document.getElementById('perfil-cidade').value = addr.cidade || '';
+                        document.getElementById('perfil-uf').value = addr.uf || '';
+                    }
+                    
+                    console.log('✅ Dados do usuário carregados');
+                } else {
+                    console.error('❌ Erro ao carregar dados:', userData.error);
+                    showAlert('Erro ao carregar dados do perfil. Tente novamente.', 'danger');
+                }
+            } catch (error) {
+                console.error('❌ Erro:', error);
+                showAlert('Erro ao carregar perfil. Tente novamente.', 'danger');
+            }
+        }
+        
+        // ========================================
+        // BUSCAR CEP (ViaCEP)
+        // ========================================
+        
+        async function buscarCEP(cep) {
+            const cepLimpo = cep.replace(/\D/g, '');
+            
+            if (cepLimpo.length !== 8) {
+                showAlert('CEP deve conter 8 dígitos.', 'warning');
+                return;
+            }
+            
+            const loading = document.getElementById('cep-loading-perfil');
+            loading.classList.remove('d-none');
+            
+            try {
+                const response = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+                const data = await response.json();
+                
+                if (data.erro) {
+                    showAlert('CEP não encontrado. Verifique e tente novamente.', 'warning');
+                    loading.classList.add('d-none');
+                    return;
+                }
+                
+                // Preencher campos
+                document.getElementById('perfil-logradouro').value = data.logradouro || '';
+                document.getElementById('perfil-bairro').value = data.bairro || '';
+                document.getElementById('perfil-cidade').value = data.localidade || '';
+                document.getElementById('perfil-uf').value = data.uf || '';
+                
+                // Focar no campo número
+                document.getElementById('perfil-numero').focus();
+                
+                showAlert('Endereço encontrado! Complete o número e complemento.', 'success');
+                loading.classList.add('d-none');
+                
+            } catch (error) {
+                console.error('❌ Erro ao buscar CEP:', error);
+                showAlert('Erro ao buscar CEP. Tente novamente.', 'danger');
+                loading.classList.add('d-none');
+            }
+        }
+        
+        // Event listeners para CEP
+        const cepInput = document.getElementById('perfil-cep');
+        const btnBuscarCEP = document.getElementById('btn-buscar-cep-perfil');
+        
+        // Máscara de CEP
+        cepInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '-' + value.substring(5, 8);
+            }
+            e.target.value = value;
+        });
+        
+        // Buscar ao clicar no botão
+        btnBuscarCEP.addEventListener('click', function() {
+            const cep = cepInput.value;
+            if (cep) {
+                buscarCEP(cep);
+            }
+        });
+        
+        // Buscar ao perder foco (se CEP completo)
+        cepInput.addEventListener('blur', function() {
+            const cep = cepInput.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                buscarCEP(cepInput.value);
+            }
+        });
+        
+        // ========================================
+        // SALVAR ALTERAÇÕES
+        // ========================================
+        
+        const formPerfil = document.getElementById('form-perfil');
+        
+        formPerfil.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!formPerfil.checkValidity()) {
+                formPerfil.classList.add('was-validated');
+                return;
+            }
+            
+            const user = getCurrentUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const submitBtn = formPerfil.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const spinner = submitBtn.querySelector('.spinner-border');
+            
+            // Loading
+            submitBtn.disabled = true;
+            spinner.classList.remove('d-none');
+            btnText.innerHTML = '<i class="bi bi-hourglass-split"></i> Salvando...';
+            
+            try {
+                // Montar objeto de endereço
+                const address = {
+                    cep: document.getElementById('perfil-cep').value.replace(/\D/g, ''),
+                    logradouro: document.getElementById('perfil-logradouro').value.trim(),
+                    numero: document.getElementById('perfil-numero').value.trim(),
+                    complemento: document.getElementById('perfil-complemento').value.trim(),
+                    bairro: document.getElementById('perfil-bairro').value.trim(),
+                    cidade: document.getElementById('perfil-cidade').value.trim(),
+                    uf: document.getElementById('perfil-uf').value.trim().toUpperCase()
+                };
+                
+                // Atualizar nome no Firebase Auth
+                const newName = document.getElementById('perfil-nome').value.trim();
+                await updateProfile(user, {
+                    displayName: newName
+                });
+                
+                // Atualizar dados no Firestore
+                const updateData = {
+                    name: newName,
+                    address: address,
+                    updatedAt: new Date().toISOString()
+                };
+                
+                const result = await updateUserProfile(user.uid, updateData);
+                
+                if (result.success) {
+                    showAlert('Perfil atualizado com sucesso!', 'success');
+                    
+                    // Atualizar avatar
+                    const avatar = document.getElementById('profile-avatar');
+                    const initials = newName.charAt(0).toUpperCase();
+                    avatar.innerHTML = `<span>${initials}</span>`;
+                    
+                    // Atualizar nome na tela
+                    document.getElementById('profile-name').textContent = newName;
+                    document.getElementById('user-name-sidebar').textContent = newName;
+                    
+                    // Recarregar dados após 1 segundo
+                    setTimeout(() => {
+                        loadUserData(user);
+                    }, 1000);
+                } else {
+                    showAlert('Erro ao atualizar perfil: ' + result.error, 'danger');
+                }
+                
+            } catch (error) {
+                console.error('❌ Erro ao salvar:', error);
+                showAlert('Erro ao salvar alterações. Tente novamente.', 'danger');
+            } finally {
+                // Remover loading
+                submitBtn.disabled = false;
+                spinner.classList.add('d-none');
+                btnText.innerHTML = '<i class="bi bi-check-circle"></i> Salvar Alterações';
+            }
+        });
+        
+        // ========================================
+        // LOGOUT
+        // ========================================
+        
+        document.getElementById('btn-logout-sidebar').addEventListener('click', async function(e) {
+            e.preventDefault();
+            if (confirm('Tem certeza que deseja sair?')) {
+                await signOutUser();
+                window.location.href = 'index.html';
+            }
+        });
+        
+        // ========================================
+        // FUNÇÕES AUXILIARES
+        // ========================================
+        
+        function showAlert(message, type = 'danger') {
+            const alertContainer = document.getElementById('alert-container');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
+

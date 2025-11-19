@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cadastrar Nova Doação - Conecta Doações">
+    <title>Cadastrar Item - Conecta Doações</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, #198754 0%, #157347 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 30px 20px;
+            position: sticky;
+            top: 0;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .user-profile {
+            margin-top: auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .main-content {
+            padding: 40px;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        
+        .form-control,
+        .form-select {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+        }
+        
+        .image-upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            background: #f8f9fa;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-upload-area.has-image {
+            border: 2px solid #198754;
+            background: white;
+        }
+        
+        .image-preview-item {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #dee2e6;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-preview-item .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(220, 53, 69, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-preview-item .remove-btn:hover {
+            background: rgba(220, 53, 69, 1);
+            transform: scale(1.1);
+        }
+        
+        #preview-placeholder {
+            padding: 20px;
+        }
+        
+        #preview-container {
+            width: 100%;
+            min-height: 200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .form-check-input:checked {
+            background-color: #198754;
+            border-color: #198754;
+        }
+        
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+            border: none;
+        }
+        
+        .btn-cancel:hover {
+            background: #5a6268;
+            color: white;
+        }
+        
+        .tip-box {
+            background: #e7f5e7;
+            border-left: 4px solid #198754;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .tip-box h6 {
+            color: #198754;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar d-flex flex-column">
+                <div class="logo">
+                    <i class="bi bi-heart-fill"></i> Conecta Doações
+                    <div class="small mt-2" style="opacity: 0.9;">
+                        Juntos por um Futuro Sustentável
+                    </div>
+                </div>
+                
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i> Início
+                    </a>
+                    <a class="nav-link" href="meus-itens.html">
+                        <i class="bi bi-box"></i> Meus Itens
+                    </a>
+                    <a class="nav-link active" href="nova-doacao.html">
+                        <i class="bi bi-plus-circle"></i> Cadastrar Item
+                    </a>
+                    <a class="nav-link" href="mensagens.html">
+                        <i class="bi bi-envelope"></i> Mensagens
+                    </a>
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </a>
+                </nav>
+                
+                <div class="user-profile">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center" 
+                             style="width: 40px; height: 40px; color: #198754;">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="ms-2">
+                            <div class="small fw-bold" id="user-name">Carregando...</div>
+                            <div class="small" style="opacity: 0.8;" id="user-email"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                <h1 class="mb-3">Cadastrar Novo Item</h1>
+                <p class="text-muted mb-4">
+                    Preencha os campos abaixo para listar seu item para doação.
+                </p>
+                
+                <!-- Alert Container -->
+                <div id="alert-container"></div>
+                
+                <!-- Form -->
+                <form id="form-nova-doacao" class="form-section">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- Nome do Item -->
+                            <div class="mb-4">
+                                <label for="item-nome" class="form-label">Nome do Item *</label>
+                                <input type="text" class="form-control" id="item-nome" 
+                                       placeholder="Ex: Sofá 3 lugares" required minlength="3">
+                                <div class="invalid-feedback">
+                                    O nome deve ter no mínimo 3 caracteres.
+                                </div>
+                            </div>
+                            
+                            <!-- Descrição -->
+                            <div class="mb-4">
+                                <label for="item-descricao" class="form-label">Descrição Detalhada *</label>
+                                <textarea class="form-control" id="item-descricao" rows="5" 
+                                          placeholder="Descreva o estado, tamanho, cor e outros detalhes relevantes." 
+                                          required minlength="10"></textarea>
+                                <div class="invalid-feedback">
+                                    A descrição deve ter no mínimo 10 caracteres.
+                                </div>
+                            </div>
+                            
+                            <!-- Categoria e Condição -->
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="item-categoria" class="form-label">Categoria *</label>
+                                    <select class="form-select" id="item-categoria" required>
+                                        <option value="">Selecione uma categoria</option>
+                                        <option value="Móveis">Móveis</option>
+                                        <option value="Roupas">Roupas</option>
+                                        <option value="Eletrônicos">Eletrônicos</option>
+                                        <option value="Livros">Livros</option>
+                                        <option value="Brinquedos">Brinquedos</option>
+                                        <option value="Outros">Outros</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Selecione uma categoria.
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="item-condicao" class="form-label">Condição *</label>
+                                    <select class="form-select" id="item-condicao" required>
+                                        <option value="">Selecione a condição</option>
+                                        <option value="Novo">Novo</option>
+                                        <option value="Usado - Ótimo">Usado - Ótimo</option>
+                                        <option value="Usado - Bom">Usado - Bom</option>
+                                        <option value="Precisa Reparo">Precisa Reparo</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Selecione a condição do item.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Endereço do Usuário -->
+                            <div class="mb-4">
+                                <label class="form-label">
+                                    <i class="bi bi-geo-alt"></i> Localização do Item
+                                </label>
+                                
+                                <!-- Loading do endereço -->
+                                <div id="address-loading" class="text-center py-3">
+                                    <div class="spinner-border spinner-border-sm text-success" role="status">
+                                        <span class="visually-hidden">Carregando...</span>
+                                    </div>
+                                    <small class="text-muted d-block mt-2">Carregando seu endereço...</small>
+                                </div>
+                                
+                                <!-- Endereço completo (somente leitura) -->
+                                <div id="address-display" class="d-none">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <div>
+                                                    <h6 class="mb-1">
+                                                        <i class="bi bi-house-door"></i> Seu Endereço
+                                                    </h6>
+                                                    <p class="mb-0" id="address-text">
+                                                        <!-- Endereço será inserido aqui -->
+                                                    </p>
+                                                </div>
+                                                <a href="perfil.html" class="btn btn-sm btn-outline-primary" title="Editar endereço no perfil">
+                                                    <i class="bi bi-pencil"></i> Editar
+                                                </a>
+                                            </div>
+                                            <small class="text-muted">
+                                                <i class="bi bi-info-circle"></i> 
+                                                Este endereço será usado para localizar seu item. 
+                                                Para alterar, edite seu perfil.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Mensagem se não houver endereço -->
+                                <div id="address-missing" class="alert alert-warning d-none">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                    <strong>Endereço não cadastrado!</strong>
+                                    <p class="mb-2">Você precisa cadastrar seu endereço antes de doar um item.</p>
+                                    <a href="perfil.html" class="btn btn-sm btn-warning">
+                                        <i class="bi bi-plus-circle"></i> Cadastrar Endereço
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Fotos do Item -->
+                            <div class="mb-4">
+                                <label class="form-label">
+                                    <i class="bi bi-images"></i> Fotos do Item (até 3 fotos)
+                                </label>
+                                
+                                <!-- Upload de Arquivos -->
+                                <div class="mb-3">
+                                    <label for="item-images-file" class="form-label">
+                                        <i class="bi bi-upload"></i> Selecionar Fotos do Computador
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="item-images-file" 
+                                               accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
+                                               multiple>
+                                        <label class="input-group-text btn btn-outline-success" for="item-images-file" style="cursor: pointer;">
+                                            <i class="bi bi-folder2-open"></i> Escolher Fotos
+                                        </label>
+                                    </div>
+                                    <small class="text-muted">
+                                        <i class="bi bi-info-circle"></i> Você pode selecionar até 3 fotos. Formatos: JPG, PNG, GIF, WEBP (Máx. 5MB cada)
+                                    </small>
+                                    <div id="file-info" class="mt-2 small text-success" style="display: none;"></div>
+                                </div>
+                                
+                                <!-- Opção: URLs de Imagem -->
+                                <div class="mb-3">
+                                    <label for="item-image-urls" class="form-label">
+                                        <i class="bi bi-link-45deg"></i> Ou cole URLs de imagens (uma por linha, até 3)
+                                    </label>
+                                    <textarea class="form-control" id="item-image-urls" rows="3"
+                                           placeholder="https://exemplo.com/foto1.jpg&#10;https://exemplo.com/foto2.jpg"></textarea>
+                                    <small class="text-muted">Cole uma URL por linha</small>
+                                </div>
+                                
+                                <!-- Preview das Imagens -->
+                                <div class="image-upload-area" id="image-upload-area">
+                                    <div id="preview-container" class="d-flex flex-wrap gap-3 justify-content-center">
+                                        <div id="preview-placeholder" class="w-100 text-center">
+                                            <i class="bi bi-images" style="font-size: 3rem; color: #6c757d;"></i>
+                                            <p class="mt-3 mb-0 text-muted">
+                                                Nenhuma imagem selecionada
+                                            </p>
+                                            <small class="text-muted">Selecione até 3 fotos</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Checkbox Termos -->
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="aceitar-termos-doacao" required>
+                                <label class="form-check-label" for="aceitar-termos-doacao">
+                                    Declaro que o item está em condições de doação e cumpre os 
+                                    <a href="#" class="text-success fw-bold">Termos de Serviço</a>.
+                                </label>
+                                <div class="invalid-feedback">
+                                    Você deve aceitar os termos para continuar.
+                                </div>
+                            </div>
+                            
+                            <!-- Botões -->
+                            <div class="d-flex gap-3">
+                                <button type="button" class="btn btn-cancel" onclick="window.location.href='index.html'">
+                                    <i class="bi bi-x-circle"></i> Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <span class="btn-text">
+                                        <i class="bi bi-check-circle"></i> Cadastrar Item
+                                    </span>
+                                    <span class="spinner-border spinner-border-sm d-none ms-2" role="status">
+                                        <span class="visually-hidden">Carregando...</span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Dicas -->
+                        <div class="col-md-4">
+                            <div class="tip-box">
+                                <h6><i class="bi bi-lightbulb"></i> Dica Rápida</h6>
+                                <p class="mb-0 small">
+                                    Tire fotos de boa qualidade do seu item para aumentar as chances de doação!
+                                </p>
+                            </div>
+                            
+                            <div class="tip-box">
+                                <h6><i class="bi bi-info-circle"></i> Dica Adicional</h6>
+                                <p class="mb-0 small">
+                                    Uma descrição detalhada ajuda quem busca o item ideal.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Moderno -->
+    <footer class="footer-modern mt-5" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important; background-color: #1a1a1a !important; color: #ffffff !important;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Logo e Descrição -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand mb-3">
+                        <h4 class="fw-bold text-white mb-2">
+                            <i class="bi bi-heart-fill text-success"></i> Conecta Doações
+                        </h4>
+                        <p class="text-white-50 mb-3">
+                            Conectando doadores e beneficiários em comunidades locais, promovendo a economia circular e reduzindo o desperdício.
+                        </p>
+                        <div class="footer-ods-badge">
+                            <span class="badge bg-success px-3 py-2">
+                                <i class="bi bi-globe"></i> ODS 11 - Cidades Sustentáveis
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-link-45deg"></i> Links Rápidos
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-house me-2"></i> Início
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="login.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Entrar
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="como-funciona.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-question-circle me-2"></i> Como Funciona
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="sobre.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-info-circle me-2"></i> Sobre
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Navegação -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-compass"></i> Navegação
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-search me-2"></i> Buscar Doações
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="nova-doacao.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-plus-circle me-2"></i> Doar Item
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="meus-itens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box me-2"></i> Meus Itens
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="mensagens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-envelope me-2"></i> Mensagens
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ODS 11 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-globe-americas"></i> Objetivos ODS
+                    </h6>
+                    <div class="footer-ods-content">
+                        <p class="text-white-50 small mb-3">
+                            Contribuímos para o <strong class="text-white">ODS 11</strong> - Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.
+                        </p>
+                        <div class="footer-social">
+                            <p class="text-white-50 small mb-2">Conecte-se conosco:</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-light text-dark">Sustentabilidade</span>
+                                <span class="badge bg-light text-dark">Comunidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <hr class="footer-divider my-4">
+            
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <p class="text-white-50 small mb-2 mb-md-0">
+                            &copy; 2025 <strong class="text-white">Conecta Doações</strong>. Todos os direitos reservados.
+                        </p>
+                        <p class="text-white-50 small mb-0">
+                            MVP - Etapa 2 (N708) | Desenvolvido com <i class="bi bi-heart-fill text-danger"></i> para comunidades sustentáveis
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase e Lógica -->
+    <script type="module">
+        console.log('🚀 Script iniciado - nova-doacao.html');
+        
+        import { auth, getCurrentUser, getUserData } from './js/auth.js';
+        import { createDonation } from './js/donations.js';
+        import { storage } from './js/firebase-config.js';
+        import { ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        
+        console.log('✅ Imports carregados');
+
+        // ========================================
+        // VERIFICAR AUTENTICAÇÃO
+        // ========================================
+        
+        console.log('🔍 Verificando autenticação...');
+        
+        onAuthStateChanged(auth, async (user) => {
+            console.log('👤 Estado de autenticação:', user ? `Logado: ${user.email}` : 'Não logado');
+            
+            if (!user) {
+                console.log('❌ Usuário não autenticado, redirecionando...');
+                alert('Você precisa estar logado para cadastrar uma doação.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            console.log('✅ Usuário autenticado, carregando dados...');
+            
+            // Carregar dados do usuário
+            const userData = await getUserData(user.uid);
+            if (userData.success) {
+                document.getElementById('user-name').textContent = userData.data.name || user.displayName;
+                document.getElementById('user-email').textContent = user.email;
+                console.log('✅ Dados do usuário carregados');
+                
+                // Carregar endereço do usuário
+                loadUserAddress(userData.data);
+            } else {
+                console.log('⚠️ Erro ao carregar dados do usuário');
+            }
+        });
+        
+        // Variável global para armazenar endereço do usuário
+        let userAddress = null;
+        
+        // ========================================
+        // CARREGAR ENDEREÇO DO USUÁRIO
+        // ========================================
+        
+        function loadUserAddress(userData) {
+            const addressLoading = document.getElementById('address-loading');
+            const addressDisplay = document.getElementById('address-display');
+            const addressMissing = document.getElementById('address-missing');
+            const addressText = document.getElementById('address-text');
+            
+            if (!addressLoading || !addressDisplay || !addressMissing || !addressText) {
+                console.warn('⚠️ Elementos de endereço não encontrados');
+                return;
+            }
+            
+            // Verificar se usuário tem endereço cadastrado
+            if (userData.address) {
+                const addr = userData.address;
+                userAddress = addr;
+                
+                // Montar texto do endereço
+                let addressString = '';
+                if (addr.logradouro) {
+                    addressString += `${addr.logradouro}`;
+                    if (addr.numero) {
+                        addressString += `, ${addr.numero}`;
+                    }
+                    if (addr.complemento) {
+                        addressString += ` - ${addr.complemento}`;
+                    }
+                    addressString += '<br>';
+                }
+                if (addr.bairro) {
+                    addressString += `${addr.bairro}`;
+                }
+                if (addr.cidade && addr.uf) {
+                    addressString += ` - ${addr.cidade}/${addr.uf}`;
+                }
+                if (addr.cep) {
+                    addressString += `<br><strong>CEP:</strong> ${addr.cep}`;
+                }
+                
+                addressText.innerHTML = addressString || 'Endereço não informado';
+                
+                // Esconder loading e mostrar endereço
+                addressLoading.classList.add('d-none');
+                addressDisplay.classList.remove('d-none');
+                addressMissing.classList.add('d-none');
+                
+                console.log('✅ Endereço carregado:', userAddress);
+            } else if (userData.location) {
+                // Fallback: usar location antigo se não houver address
+                userAddress = {
+                    location: userData.location,
+                    cidade: userData.location.split(',')[0]?.trim() || '',
+                    uf: userData.location.split(',')[1]?.split('-')[0]?.trim() || '',
+                    bairro: userData.location.split('-')[1]?.trim() || ''
+                };
+                
+                addressText.innerHTML = userData.location;
+                addressLoading.classList.add('d-none');
+                addressDisplay.classList.remove('d-none');
+                addressMissing.classList.add('d-none');
+                
+                console.log('⚠️ Usando location antigo (sem endereço completo):', userAddress);
+            } else {
+                // Não tem endereço cadastrado
+                addressLoading.classList.add('d-none');
+                addressDisplay.classList.add('d-none');
+                addressMissing.classList.remove('d-none');
+                
+                console.warn('❌ Usuário não tem endereço cadastrado');
+            }
+        }
+
+        // ========================================
+        // FUNÇÕES AUXILIARES
+        // ========================================
+
+        function showAlert(message, type = 'danger') {
+            const alertContainer = document.getElementById('alert-container');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alert);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        function toggleLoading(button, isLoading) {
+            const spinner = button.querySelector('.spinner-border');
+            const text = button.querySelector('.btn-text');
+            
+            if (isLoading) {
+                button.disabled = true;
+                spinner.classList.remove('d-none');
+                text.innerHTML = '<i class="bi bi-hourglass-split"></i> Cadastrando...';
+            } else {
+                button.disabled = false;
+                spinner.classList.add('d-none');
+                text.innerHTML = '<i class="bi bi-check-circle"></i> Cadastrar Item';
+            }
+        }
+
+        function validateForm(form) {
+            form.classList.add('was-validated');
+            return form.checkValidity();
+        }
+
+        // ========================================
+        // PREVIEW DE MÚLTIPLAS IMAGENS
+        // ========================================
+
+        let selectedFiles = []; // Array de arquivos selecionados
+        let selectedImageUrls = []; // Array de URLs de imagens
+        const MAX_IMAGES = 3;
+
+        console.log('📝 Configurando event listeners...');
+        
+        // Event listener para seleção de múltiplos arquivos
+        const fileInput = document.getElementById('item-images-file');
+        
+        if (!fileInput) {
+            console.error('❌ Input de arquivo não encontrado!');
+        } else {
+            console.log('✅ Input de arquivo encontrado');
+            
+            fileInput.addEventListener('change', function(event) {
+                console.log('📁 Arquivos selecionados:', event.target.files.length);
+                
+                const files = Array.from(event.target.files);
+                const fileInfo = document.getElementById('file-info');
+                
+                if (files.length === 0) {
+                    console.log('Nenhum arquivo selecionado');
+                    return;
+                }
+
+                // Calcular quantas imagens já temos
+                const currentTotal = selectedFiles.length + selectedImageUrls.length;
+                const availableSlots = MAX_IMAGES - currentTotal;
+                
+                if (availableSlots <= 0) {
+                    showAlert(`Você já selecionou ${MAX_IMAGES} fotos. Remova algumas antes de adicionar novas.`, 'warning');
+                    event.target.value = '';
+                    return;
+                }
+
+                // Validar cada arquivo
+                const validFiles = [];
+                for (let i = 0; i < files.length && validFiles.length < availableSlots; i++) {
+                    const file = files[i];
+                    
+                    // Validar tamanho (máx 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        showAlert(`A imagem "${file.name}" excede 5MB. Ela será ignorada.`, 'warning');
+                        continue;
+                    }
+
+                    // Validar tipo
+                    if (!file.type.startsWith('image/')) {
+                        showAlert(`O arquivo "${file.name}" não é uma imagem válida.`, 'warning');
+                        continue;
+                    }
+
+                    validFiles.push(file);
+                }
+
+                // Adicionar aos arquivos existentes (não substituir)
+                selectedFiles = [...selectedFiles, ...validFiles].slice(0, MAX_IMAGES);
+                
+                // Limpar URLs se houver arquivos
+                if (selectedFiles.length > 0) {
+                    document.getElementById('item-image-urls').value = '';
+                    selectedImageUrls = [];
+                }
+
+                // Mostrar informações
+                if (selectedFiles.length > 0) {
+                    const totalSize = selectedFiles.reduce((sum, f) => sum + f.size, 0);
+                    const totalSizeMB = (totalSize / (1024 * 1024)).toFixed(2);
+                    fileInfo.innerHTML = `
+                        <i class="bi bi-check-circle"></i> 
+                        <strong>${selectedFiles.length}</strong> foto(s) selecionada(s) (${totalSizeMB} MB total)
+                        ${selectedFiles.length >= MAX_IMAGES ? '<br><small class="text-muted">Limite de ' + MAX_IMAGES + ' fotos atingido</small>' : ''}
+                    `;
+                    fileInfo.style.display = 'block';
+                } else {
+                    fileInfo.style.display = 'none';
+                }
+
+                // Limpar o input para permitir selecionar o mesmo arquivo novamente se necessário
+                event.target.value = '';
+
+                // Criar previews
+                updateImagePreviews();
+            });
+        }
+
+        // Event listener para URLs de imagem
+        const urlInput = document.getElementById('item-image-urls');
+        
+        if (!urlInput) {
+            console.error('❌ Input de URLs não encontrado!');
+        } else {
+            console.log('✅ Input de URLs encontrado');
+            
+            urlInput.addEventListener('input', function(event) {
+                const urlsText = event.target.value.trim();
+                
+                // Limpar arquivos se houver URLs
+                if (urlsText) {
+                    document.getElementById('item-images-file').value = '';
+                    selectedFiles = [];
+                }
+                
+                // Processar URLs (uma por linha)
+                const urls = urlsText.split('\n')
+                    .map(url => url.trim())
+                    .filter(url => url && isValidImageUrl(url))
+                    .slice(0, MAX_IMAGES);
+                
+                selectedImageUrls = urls;
+                updateImagePreviews();
+            });
+        }
+
+        console.log('✅ Event listeners configurados');
+
+        function updateImagePreviews() {
+            console.log('🖼️ ========== ATUALIZANDO PREVIEWS ==========');
+            console.log('  - Arquivos selecionados:', selectedFiles.length);
+            console.log('  - URLs selecionadas:', selectedImageUrls.length);
+            
+            const previewContainer = document.getElementById('preview-container');
+            const previewPlaceholder = document.getElementById('preview-placeholder');
+            const uploadArea = document.getElementById('image-upload-area');
+
+            // Verificar se os elementos existem
+            if (!previewContainer || !previewPlaceholder || !uploadArea) {
+                console.warn('⚠️ Elementos de preview não encontrados');
+                return;
+            }
+
+            // Limpar previews anteriores completamente
+            previewContainer.innerHTML = '';
+
+            // Se não há imagens, mostrar placeholder
+            if (selectedFiles.length === 0 && selectedImageUrls.length === 0) {
+                console.log('  ⚠️ Nenhuma imagem, mostrando placeholder');
+                previewPlaceholder.classList.remove('d-none');
+                uploadArea.classList.remove('has-image');
+                return;
+            }
+
+            previewPlaceholder.classList.add('d-none');
+            uploadArea.classList.add('has-image');
+
+            // Obter todas as imagens (arquivos + URLs)
+            const allImages = [];
+            let filesLoaded = 0;
+            
+            // Função para renderizar todos os previews
+            function renderPreviews() {
+                console.log('🎨 Renderizando previews...');
+                console.log('  - Total de imagens no allImages:', allImages.length);
+                
+                // Limpar novamente para evitar duplicatas
+                previewContainer.innerHTML = '';
+
+                // Ordenar por índice
+                const sortedImages = [...allImages].sort((a, b) => a.index - b.index);
+                
+                console.log('  - Imagens ordenadas:', sortedImages.length);
+                sortedImages.forEach((img, idx) => {
+                    console.log(`    ${idx + 1}. ${img.type} - índice ${img.index}`);
+                });
+
+                // Renderizar cada imagem
+                sortedImages.forEach((img) => {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'image-preview-item';
+                    previewItem.innerHTML = `
+                        <img src="${img.src}" alt="Preview ${img.index + 1}">
+                        <button type="button" class="remove-btn" data-index="${img.index}" data-type="${img.type}">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    `;
+                    previewContainer.appendChild(previewItem);
+                });
+
+                // Adicionar event listeners para remover
+                previewContainer.querySelectorAll('.remove-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const index = parseInt(this.dataset.index);
+                        const type = this.dataset.type;
+                        
+                        if (type === 'file') {
+                            selectedFiles.splice(index, 1);
+                            document.getElementById('item-images-file').value = '';
+                        } else {
+                            selectedImageUrls.splice(index - selectedFiles.length, 1);
+                            document.getElementById('item-image-urls').value = selectedImageUrls.join('\n');
+                        }
+                        
+                        // Atualizar informações
+                        const fileInfo = document.getElementById('file-info');
+                        if (selectedFiles.length > 0) {
+                            const totalSize = selectedFiles.reduce((sum, f) => sum + f.size, 0);
+                            const totalSizeMB = (totalSize / (1024 * 1024)).toFixed(2);
+                            fileInfo.innerHTML = `
+                                <i class="bi bi-check-circle"></i> 
+                                <strong>${selectedFiles.length}</strong> foto(s) selecionada(s) (${totalSizeMB} MB total)
+                            `;
+                        } else {
+                            fileInfo.style.display = 'none';
+                        }
+                        
+                        updateImagePreviews();
+                    });
+                });
+            }
+
+            // Adicionar previews de arquivos
+            if (selectedFiles.length > 0) {
+                selectedFiles.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        allImages.push({
+                            type: 'file',
+                            src: e.target.result,
+                            file: file,
+                            index: index
+                        });
+                        filesLoaded++;
+                        console.log(`📄 Arquivo ${index + 1} carregado (${filesLoaded}/${selectedFiles.length})`);
+                        
+                        // Quando todos os arquivos foram carregados, adicionar URLs e renderizar
+                        if (filesLoaded === selectedFiles.length) {
+                            // Adicionar URLs agora
+                            selectedImageUrls.forEach((url, urlIndex) => {
+                                allImages.push({
+                                    type: 'url',
+                                    src: url,
+                                    index: selectedFiles.length + urlIndex
+                                });
+                                console.log(`🔗 URL ${urlIndex + 1} adicionada`);
+                            });
+                            renderPreviews();
+                        }
+                    };
+                    reader.onerror = function() {
+                        console.error('❌ Erro ao ler arquivo:', file.name);
+                        filesLoaded++;
+                        if (filesLoaded === selectedFiles.length) {
+                            selectedImageUrls.forEach((url, urlIndex) => {
+                                allImages.push({
+                                    type: 'url',
+                                    src: url,
+                                    index: selectedFiles.length + urlIndex
+                                });
+                            });
+                            renderPreviews();
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                // Se não há arquivos, adicionar URLs e renderizar imediatamente
+                selectedImageUrls.forEach((url, index) => {
+                    allImages.push({
+                        type: 'url',
+                        src: url,
+                        index: index
+                    });
+                });
+                renderPreviews();
+            }
+        }
+
+        function isValidImageUrl(url) {
+            return url.match(/\.(jpeg|jpg|gif|png|webp)$/i) || url.startsWith('http');
+        }
+
+        // ========================================
+        // SUBMIT FORM
+        // ========================================
+
+        // Aguardar DOM estar pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupForm);
+        } else {
+            setupForm();
+        }
+        
+        function setupForm() {
+            console.log('📝 Configurando formulário...');
+            
+            const form = document.getElementById('form-nova-doacao');
+            
+            if (!form) {
+                console.error('❌ Formulário não encontrado!');
+                return;
+            }
+            
+            console.log('✅ Formulário encontrado');
+            
+            form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            console.log('📤 ========== FORMULÁRIO SUBMETIDO ==========');
+
+            if (!validateForm(form)) {
+                console.log('⚠️ Validação falhou');
+                showAlert('Por favor, preencha todos os campos obrigatórios corretamente.', 'warning');
+                return;
+            }
+            
+            console.log('✅ Validação passou');
+
+            const user = getCurrentUser();
+            if (!user) {
+                console.log('❌ Usuário não autenticado');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            console.log('✅ Usuário autenticado:', user.uid);
+            
+            // Verificar se usuário tem endereço antes de continuar
+            if (!userAddress) {
+                showAlert('Você precisa ter um endereço cadastrado para doar um item. Por favor, edite seu perfil para adicionar um endereço.', 'warning');
+                return;
+            }
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            toggleLoading(submitBtn, true);
+
+            try {
+                console.log('🔄 Iniciando processo de cadastro...');
+                
+                // Obter URLs das imagens (arquivos ou URLs)
+                let imageUrls = [];
+                
+                console.log('📸 Verificando imagens...');
+                console.log('  - Arquivos selecionados:', selectedFiles.length);
+                console.log('  - URLs informadas:', selectedImageUrls.length);
+                
+                // Se há arquivos selecionados, fazer upload para Firebase Storage
+                if (selectedFiles.length > 0) {
+                    console.log('📤 Fazendo upload dos arquivos...');
+                    
+                    if (!storage) {
+                        console.warn('Firebase Storage não está configurado. Usando data URLs.');
+                        showAlert('⚠️ Storage não configurado. Usando imagens locais.', 'warning');
+                    } else {
+                        showAlert(`Fazendo upload de ${selectedFiles.length} imagem(ns)... Aguarde.`, 'info');
+                    }
+                    
+                    // Upload de cada arquivo
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        const file = selectedFiles[i];
+                        
+                        try {
+                            if (storage) {
+                                const fileName = `donations/${user.uid}/${Date.now()}_${i}_${file.name}`;
+                                const storageRef = ref(storage, fileName);
+                                
+                                // Upload para Firebase Storage
+                                await uploadBytes(storageRef, file);
+                                
+                                // Obter URL de download
+                                const url = await getDownloadURL(storageRef);
+                                imageUrls.push(url);
+                                console.log(`✅ Imagem ${i + 1} enviada:`, url);
+                            } else {
+                                // Fallback: usar data URL
+                                const reader = new FileReader();
+                                const dataUrl = await new Promise((resolve, reject) => {
+                                    reader.onload = () => resolve(reader.result);
+                                    reader.onerror = reject;
+                                    reader.readAsDataURL(file);
+                                });
+                                imageUrls.push(dataUrl);
+                            }
+                        } catch (uploadError) {
+                            console.error(`Erro ao fazer upload da imagem ${i + 1}:`, uploadError);
+                            showAlert(`Erro ao fazer upload da imagem ${i + 1}. Ela será ignorada.`, 'warning');
+                        }
+                    }
+                } else if (selectedImageUrls.length > 0) {
+                    // Usar URLs fornecidas
+                    imageUrls = selectedImageUrls;
+                    console.log('✅ Usando URLs fornecidas');
+                } else {
+                    // Nenhuma imagem, usar placeholder
+                    imageUrls = ['https://via.placeholder.com/400x300?text=Sem+Imagem'];
+                    console.log('⚠️ Nenhuma imagem, usando placeholder');
+                }
+
+                console.log('📝 Preparando dados da doação...');
+                console.log('📸 URLs das imagens:', imageUrls);
+                console.log('📸 Total de URLs:', imageUrls.length);
+                console.log('📸 imageUrls é array?', Array.isArray(imageUrls));
+                
+                // Garantir que imageUrls seja sempre um array
+                const finalImageUrls = Array.isArray(imageUrls) ? imageUrls : (imageUrls ? [imageUrls] : []);
+                
+                // Montar localização do endereço (já validado antes)
+                let location = '';
+                if (userAddress.cidade && userAddress.uf) {
+                    location = `${userAddress.cidade}, ${userAddress.uf}`;
+                    if (userAddress.bairro) {
+                        location += ` - ${userAddress.bairro}`;
+                    }
+                } else if (userAddress.location) {
+                    location = userAddress.location;
+                } else {
+                    location = 'Endereço não informado';
+                }
+                
+                console.log('📍 Localização do item:', location);
+                console.log('📍 Endereço completo:', userAddress);
+                
+                const donationData = {
+                    title: document.getElementById('item-nome').value.trim(),
+                    description: document.getElementById('item-descricao').value.trim(),
+                    category: document.getElementById('item-categoria').value,
+                    condition: document.getElementById('item-condicao').value,
+                    location: location, // Localização formatada
+                    address: userAddress, // Endereço completo
+                    imageUrls: finalImageUrls, // Array de URLs - SEMPRE array
+                    imageUrl: finalImageUrls[0] // Primeira imagem para compatibilidade
+                };
+
+                console.log('📦 Dados da doação:', donationData);
+                console.log('📦 imageUrls no donationData:', donationData.imageUrls);
+                console.log('📦 imageUrls é array?', Array.isArray(donationData.imageUrls));
+                console.log('📦 imageUrls.length:', donationData.imageUrls?.length);
+                console.log('📦 Tipo de imageUrls:', typeof donationData.imageUrls);
+                console.log('💾 Salvando no Firestore...');
+                
+                const result = await createDonation(donationData);
+                
+                console.log('📊 Resultado do salvamento:', result);
+
+                if (result.success) {
+                    showAlert('✅ Item cadastrado com sucesso! Redirecionando...', 'success');
+                    
+                    // Limpar dados antes de resetar
+                    selectedFiles = [];
+                    selectedImageUrls = [];
+                    
+                    // Resetar formulário
+                    form.reset();
+                    form.classList.remove('was-validated');
+                    
+                    // Limpar previews manualmente (sem chamar updateImagePreviews que pode dar erro)
+                    const previewContainer = document.getElementById('preview-container');
+                    const previewPlaceholder = document.getElementById('preview-placeholder');
+                    const uploadArea = document.getElementById('image-upload-area');
+                    const fileInfo = document.getElementById('file-info');
+                    
+                    if (previewContainer) previewContainer.innerHTML = '';
+                    if (previewPlaceholder) previewPlaceholder.classList.remove('d-none');
+                    if (uploadArea) uploadArea.classList.remove('has-image');
+                    if (fileInfo) fileInfo.style.display = 'none';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'meus-itens.html';
+                    }, 1500);
+                } else {
+                    console.error('❌ Erro ao criar doação:', result.error);
+                    showAlert(result.error || 'Erro ao cadastrar item. Verifique se está logado e tente novamente.', 'danger');
+                    toggleLoading(submitBtn, false);
+                }
+            } catch (error) {
+                console.error('❌ Erro no catch:', error);
+                showAlert(`Erro ao cadastrar item: ${error.message}. Verifique o console para mais detalhes.`, 'danger');
+                toggleLoading(submitBtn, false);
+            }
+            });
+        }
+    </script>
+</body>
+</html>
+

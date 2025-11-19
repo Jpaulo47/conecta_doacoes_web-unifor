@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conecta Doações - Plataforma para conectar doadores e beneficiários em comunidades locais">
+    <title>Conecta Doações - Juntos por um Futuro Sustentável</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/statistics.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-success" href="index.html">
+                <i class="bi bi-heart-fill"></i> Conecta Doações
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="bi bi-house"></i> Início
+                        </a>
+                    </li>
+                    <!-- Links quando usuário NÃO está logado -->
+                    <li class="nav-item" id="nav-login">
+                        <a class="nav-link" href="login.html">
+                            <i class="bi bi-box-arrow-in-right"></i> Entrar
+                        </a>
+                    </li>
+                    <li class="nav-item" id="nav-register">
+                        <a class="nav-link btn btn-success text-white ms-2" href="login.html">
+                            Cadastrar
+                        </a>
+                    </li>
+                    <!-- Links quando usuário ESTÁ logado -->
+                    <li class="nav-item d-none" id="nav-meus-itens">
+                        <a class="nav-link" href="meus-itens.html">
+                            <i class="bi bi-box"></i> Meus Itens
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="nav-mensagens">
+                        <a class="nav-link" href="mensagens.html">
+                            <i class="bi bi-envelope"></i> Mensagens
+                            <span class="badge bg-danger" id="unread-count" style="display: none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="nav-perfil">
+                        <a class="nav-link" href="perfil.html">
+                            <i class="bi bi-person"></i> Perfil
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="nav-nova-doacao">
+                        <a class="nav-link btn btn-outline-success border-2 fw-bold ms-2" href="nova-doacao.html" style="border-color: #198754 !important; color: #198754 !important;">
+                            <i class="bi bi-plus-circle"></i> Nova Doação
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="nav-logout">
+                        <a class="nav-link" href="#" id="btn-logout">
+                            <i class="bi bi-box-arrow-right"></i> Sair
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner/Hero Section -->
+    <section class="bg-success bg-gradient text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">
+                        Juntos por um Futuro Sustentável
+                    </h1>
+                    <p class="lead mb-4">
+                        Conecte-se com a sua comunidade. Doe itens que você não usa mais e ajude quem precisa.
+                        Contribua para cidades e comunidades mais sustentáveis (ODS 11).
+                    </p>
+                    <div class="d-flex gap-2">
+                        <a href="login.html" class="btn btn-light btn-lg">
+                            <i class="bi bi-heart-fill"></i> Começar a Doar
+                        </a>
+                        <a href="#doacoes" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-search"></i> Buscar Doações
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center d-none d-lg-block">
+                    <i class="bi bi-recycle" style="font-size: 150px; opacity: 0.8;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Estatísticas/Impacto -->
+    <section class="py-5 bg-light" id="estatisticas">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-success mb-3">
+                    <i class="bi bi-graph-up-arrow"></i> Nosso Impacto
+                </h2>
+                <p class="lead text-muted">
+                    Veja quantas vidas já foram transformadas através da solidariedade
+                </p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Card: Itens Doados -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card h-100">
+                        <div class="stat-card-icon stat-icon-donated">
+                            <i class="bi bi-heart-fill"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-number" data-target="0" id="stat-donated">0</h3>
+                            <p class="stat-label">Itens Doados</p>
+                            <small class="stat-description">Vidas transformadas</small>
+                        </div>
+                        <div class="stat-card-wave"></div>
+                    </div>
+                </div>
+                
+                <!-- Card: Itens Disponíveis -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card h-100">
+                        <div class="stat-card-icon stat-icon-available">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-number" data-target="0" id="stat-available">0</h3>
+                            <p class="stat-label">Itens Disponíveis</p>
+                            <small class="stat-description">Aguardando doação</small>
+                        </div>
+                        <div class="stat-card-wave"></div>
+                    </div>
+                </div>
+                
+                <!-- Card: Total de Doações -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card h-100">
+                        <div class="stat-card-icon stat-icon-total">
+                            <i class="bi bi-gift-fill"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-number" data-target="0" id="stat-total">0</h3>
+                            <p class="stat-label">Total de Doações</p>
+                            <small class="stat-description">Itens cadastrados</small>
+                        </div>
+                        <div class="stat-card-wave"></div>
+                    </div>
+                </div>
+                
+                <!-- Card: Usuários -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card h-100">
+                        <div class="stat-card-icon stat-icon-users">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-number" data-target="0" id="stat-users">0</h3>
+                            <p class="stat-label">Usuários Cadastrados</p>
+                            <small class="stat-description">Fazendo a diferença</small>
+                        </div>
+                        <div class="stat-card-wave"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mensagem de Impacto -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="impact-message text-center p-4 rounded">
+                        <p class="mb-0 lead">
+                            <i class="bi bi-quote text-success"></i>
+                            Cada doação é um passo em direção a uma comunidade mais sustentável e solidária.
+                            <i class="bi bi-quote text-success"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros e Listagem de Doações -->
+    <section class="py-5" id="doacoes">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar de Filtros -->
+                <div class="col-lg-3 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">
+                                <i class="bi bi-funnel"></i> Filtros
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filtro de Categoria -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold">Categoria</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-category" type="checkbox" value="Móveis" id="cat-moveis">
+                                    <label class="form-check-label" for="cat-moveis">
+                                        Móveis
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-category" type="checkbox" value="Roupas" id="cat-roupas">
+                                    <label class="form-check-label" for="cat-roupas">
+                                        Roupas
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-category" type="checkbox" value="Eletrônicos" id="cat-eletronicos">
+                                    <label class="form-check-label" for="cat-eletronicos">
+                                        Eletrônicos
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-category" type="checkbox" value="Livros" id="cat-livros">
+                                    <label class="form-check-label" for="cat-livros">
+                                        Livros
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-category" type="checkbox" value="Brinquedos" id="cat-brinquedos">
+                                    <label class="form-check-label" for="cat-brinquedos">
+                                        Brinquedos
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-category" type="checkbox" value="Outros" id="cat-outros">
+                                    <label class="form-check-label" for="cat-outros">
+                                        Outros
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Filtro de Condição -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold">Condição</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-condition" type="checkbox" value="Novo" id="cond-novo">
+                                    <label class="form-check-label" for="cond-novo">
+                                        Novo
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-condition" type="checkbox" value="Usado - Ótimo" id="cond-otimo">
+                                    <label class="form-check-label" for="cond-otimo">
+                                        Usado - Ótimo
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-condition" type="checkbox" value="Usado - Bom" id="cond-bom">
+                                    <label class="form-check-label" for="cond-bom">
+                                        Usado - Bom
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-condition" type="checkbox" value="Precisa Reparo" id="cond-reparo">
+                                    <label class="form-check-label" for="cond-reparo">
+                                        Precisa Reparo
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Filtro de Status -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold">Status</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-status" type="checkbox" value="available" id="status-available">
+                                    <label class="form-check-label" for="status-available">
+                                        <span class="badge bg-success">Disponível</span>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-status" type="checkbox" value="reserved" id="status-reserved">
+                                    <label class="form-check-label" for="status-reserved">
+                                        <span class="badge bg-warning text-dark">Reservado</span>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filter-status" type="checkbox" value="donated" id="status-donated">
+                                    <label class="form-check-label" for="status-donated">
+                                        <span class="badge bg-secondary">Doado</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Filtro de Localização -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold">Localização</h6>
+                                <input type="text" class="form-control form-control-sm" 
+                                       id="filter-location" 
+                                       placeholder="Ex: Fortaleza, CE">
+                                <small class="text-muted">Buscar por cidade/estado</small>
+                            </div>
+
+                            <button class="btn btn-outline-secondary w-100" id="btn-clear-filters">
+                                <i class="bi bi-x-circle"></i> Limpar Filtros
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid de Doações -->
+                <div class="col-lg-9">
+                    <!-- Barra de Busca -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input type="text" class="form-control" id="search-input" 
+                                       placeholder="Buscar por nome do item...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <div class="text-center py-5" id="loading">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <p class="mt-3 text-muted">Carregando doações disponíveis...</p>
+                    </div>
+
+                    <!-- Grid de Cards de Doações -->
+                    <div class="row g-4" id="donations-grid">
+                        <!-- Cards serão inseridos aqui dinamicamente via JavaScript -->
+                    </div>
+
+                    <!-- Mensagem quando não há doações -->
+                    <div class="text-center py-5 d-none" id="no-donations">
+                        <i class="bi bi-inbox" style="font-size: 64px; color: #ccc;"></i>
+                        <p class="text-muted mt-3">Nenhuma doação disponível no momento.</p>
+                        <a href="login.html" class="btn btn-success">
+                            <i class="bi bi-plus-circle"></i> Seja o primeiro a doar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Moderno -->
+    <footer class="footer-modern mt-5" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important; background-color: #1a1a1a !important; color: #ffffff !important;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Logo e Descrição -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand mb-3">
+                        <h4 class="fw-bold text-white mb-2">
+                            <i class="bi bi-heart-fill text-success"></i> Conecta Doações
+                        </h4>
+                        <p class="text-white-50 mb-3">
+                            Conectando doadores e beneficiários em comunidades locais, promovendo a economia circular e reduzindo o desperdício.
+                        </p>
+                        <div class="footer-ods-badge">
+                            <span class="badge bg-success px-3 py-2">
+                                <i class="bi bi-globe"></i> ODS 11 - Cidades Sustentáveis
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-link-45deg"></i> Links Rápidos
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-house me-2"></i> Início
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="login.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Entrar
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="como-funciona.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-question-circle me-2"></i> Como Funciona
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="sobre.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-info-circle me-2"></i> Sobre
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Navegação -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-compass"></i> Navegação
+                    </h6>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2">
+                            <a href="index.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-search me-2"></i> Buscar Doações
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="nova-doacao.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-plus-circle me-2"></i> Doar Item
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="meus-itens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-box me-2"></i> Meus Itens
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="mensagens.html" class="text-white-50 text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-envelope me-2"></i> Mensagens
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ODS 11 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">
+                        <i class="bi bi-globe-americas"></i> Objetivos ODS
+                    </h6>
+                    <div class="footer-ods-content">
+                        <p class="text-white-50 small mb-3">
+                            Contribuímos para o <strong class="text-white">ODS 11</strong> - Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.
+                        </p>
+                        <div class="footer-social">
+                            <p class="text-white-50 small mb-2">Conecte-se conosco:</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-light text-dark">Sustentabilidade</span>
+                                <span class="badge bg-light text-dark">Comunidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <hr class="footer-divider my-4">
+            
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <p class="text-white-50 small mb-2 mb-md-0">
+                            &copy; 2025 <strong class="text-white">Conecta Doações</strong>. Todos os direitos reservados.
+                        </p>
+                        <p class="text-white-50 small mb-0">
+                            MVP - Etapa 2 (N708) | Desenvolvido com <i class="bi bi-heart-fill text-danger"></i> para comunidades sustentáveis
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase Configuration and App Logic -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/donations.js"></script>
+    <script type="module">
+        // Import necessário para o index.html
+        import { auth } from './js/firebase-config.js';
+        import { checkAuthState } from './js/auth.js';
+        import { loadDonations, setupFilters, getStatistics } from './js/donations.js';
+        import { updateUnreadBadge } from './js/messages.js';
+
+        // Verificar estado de autenticação ao carregar a página
+        checkAuthState();
+
+        // ========================================
+        // ANIMAR CONTADORES
+        // ========================================
+        
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            element.classList.add('animating');
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                    element.classList.remove('animating');
+                }
+                element.textContent = Math.floor(current).toLocaleString('pt-BR');
+            }, 16);
+        }
+        
+        // ========================================
+        // CARREGAR ESTATÍSTICAS
+        // ========================================
+        
+        async function loadStatistics() {
+            try {
+                const stats = await getStatistics();
+                
+                if (stats.success) {
+                    const data = stats.data;
+                    
+                    // Animar contadores
+                    const statDonated = document.getElementById('stat-donated');
+                    const statAvailable = document.getElementById('stat-available');
+                    const statTotal = document.getElementById('stat-total');
+                    const statUsers = document.getElementById('stat-users');
+                    
+                    if (statDonated) animateCounter(statDonated, data.donatedCount);
+                    if (statAvailable) animateCounter(statAvailable, data.availableCount);
+                    if (statTotal) animateCounter(statTotal, data.totalDonations);
+                    if (statUsers) animateCounter(statUsers, data.totalUsers);
+                    
+                    console.log('✅ Estatísticas carregadas:', data);
+                } else {
+                    console.error('❌ Erro ao carregar estatísticas:', stats.error);
+                }
+            } catch (error) {
+                console.error('❌ Erro ao carregar estatísticas:', error);
+            }
+        }
+
+        // Carregar doações ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDonations();
+            setupFilters();
+            loadStatistics(); // Carregar estatísticas
+            
+            // Atualizar contador de mensagens se usuário logado
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    updateUnreadBadge();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
