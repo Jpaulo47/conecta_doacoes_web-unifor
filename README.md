@@ -44,9 +44,9 @@ Este projeto contribui diretamente para a **Meta 11.6**:
 ### ✅ Implementadas
 
 - [x] **Autenticação de Usuários**
-  - Cadastro com nome, e-mail e senha
+  - Cadastro com nome, e-mail, senha e endereço completo
+  - Integração com ViaCEP para busca automática de endereço
   - Login/Logout
-  - Recuperação de senha
 
 - [x] **Navegação e Descoberta**
   - Listagem pública de doações disponíveis
@@ -200,10 +200,12 @@ http://localhost:8000  (Python)
 ## 🌐 Acesso ao Sistema
 
 ### 🔗 URL de Produção
-**Em breve:** [https://conecta-doacoes-fc684.web.app](https://conecta-doacoes-fc684.web.app)
+**🚀 Sistema no ar:** [https://conecta-doacoes-fc684.web.app](https://conecta-doacoes-fc684.web.app)
 
 ### 👤 Credenciais de Teste
-Após o deploy, serão disponibilizadas credenciais de teste.
+Você pode criar sua própria conta ou usar para testes:
+- **Crie uma conta:** Clique em "Cadastrar" e preencha o formulário
+- **Sistema totalmente funcional** com cadastro, doações e mensagens
 
 ---
 
@@ -253,11 +255,23 @@ conecta-doacoes/
 
 ## 👥 Validação com Público-Alvo
 
-**Status:** 🚧 Em planejamento
+**Status:** 📋 Estrutura preparada - Aguardando realização
 
-A validação será realizada com instituições e pessoas específicas que trabalham com doações na região de Fortaleza/CE.
+### Próximos Passos
 
-Detalhes serão documentados em `validation/validation_report.md` após conclusão.
+A validação será realizada com instituições e pessoas específicas que trabalham com doações. A estrutura completa de documentação foi preparada:
+
+- ✅ Templates de documentação criados
+- ✅ Questionário estruturado preparado
+- ✅ Guia completo de instruções disponível
+- 📅 Agendamento com público-alvo em andamento
+
+**Documentação:**
+- 📝 [Instruções completas para validação](validation/INSTRUCOES_VALIDACAO.md)
+- 📋 [Template de definição de público-alvo](validation/target_audience.md)
+- 📊 [Template de relatório de validação](validation/validation_report.md)
+
+Após a validação, os feedbacks coletados serão analisados e melhorias serão implementadas no sistema.
 
 ---
 
@@ -270,8 +284,8 @@ Detalhes serão documentados em `validation/validation_report.md` após conclus�
 
 ## 📝 Status do Projeto
 
-**Fase Atual:** Configuração Inicial ✅  
-**Progresso Geral:** ~15% (Fase 1 em andamento)
+**Fase Atual:** Implementação Completa ✅  
+**Progresso Técnico:** ~95% (Aguardando validação com público-alvo)
 
 Ver detalhes completos em: [STATUS_DO_PROJETO.md](STATUS_DO_PROJETO.md)
 
