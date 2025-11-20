@@ -135,5 +135,4 @@ Use nomes descritivos:
 ---
 
 **Última Atualização:** 19/11/2025  
-**Responsável pela Validação:** [SEU NOME]
 

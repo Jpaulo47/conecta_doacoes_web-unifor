@@ -199,5 +199,4 @@ Antes de finalizar:
 ---
 
 **Última Atualização:** 19/11/2025  
-**Responsável:** [SEU NOME]
 
