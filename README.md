@@ -151,7 +151,8 @@ Este projeto contribui diretamente para a **Meta 11.6**:
 
 1. **Clone o repositório**
 ```bash
-[git clone https://github.com/[seu-usuario]/conecta-doacoes.git](https://github.com/Jpaulo47/conecta_doacoes_web-unifor.git)
+git clone https://github.com/Jpaulo47/conecta_doacoes_web-unifor.git
+
 cd conecta-doacoes
 ```
 
@@ -292,12 +293,6 @@ A validação será realizada com instituições e pessoas específicas que trab
 
 Após a validação, os feedbacks coletados serão analisados e melhorias serão implementadas no sistema.
 
----
-
-## 👨‍💻 Equipe de Desenvolvimento
-
-- **Rodrigo Gomes** - Desenvolvedor Full Stack
-- **Matrícula:** [A definir]
 
 ---
 
@@ -317,7 +312,6 @@ Após a validação, os feedbacks coletados serão analisados e melhorias serão
 - 🏗️ [Arquitetura do Sistema](docs/architecture/architecture.md)
 - 🔌 [Documentação da API](docs/api/api_documentation.md)
 - 🗄️ [Schema do Banco de Dados](database/schema.md)
-- 🔒 [Security Rules](database/security-rules.txt)
 - 🎨 [Protótipos Visuais](prototypes/)
 - ✅ [Testes Automatizados](frontend/web/tests/README.md)
 
@@ -341,18 +335,9 @@ Este projeto está sob a licença MIT. Ver arquivo `LICENSE` para mais detalhes.
 
 ---
 
-## 📞 Contato
-
-**Rodrigo Gomes**  
-📧 E-mail: [seu-email@example.com]  
-🔗 LinkedIn: [seu-linkedin]  
-🐙 GitHub: [@seu-usuario](https://github.com/seu-usuario)
-
----
-
 ## 🙏 Agradecimentos
 
-- **Universidade/Instituição** - Pelo projeto desafiador
+- **Unifor** - Pelo projeto desafiador
 - **Firebase** - Pela plataforma robusta e gratuita
 - **Bootstrap** - Pelo framework CSS responsivo
 - **Comunidade Open Source** - Por todo conhecimento compartilhado
