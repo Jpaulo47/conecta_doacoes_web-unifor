@@ -151,7 +151,7 @@ Este projeto contribui diretamente para a **Meta 11.6**:
 
 1. **Clone o repositório**
 ```bash
-git clone https://github.com/[seu-usuario]/conecta-doacoes.git
+[git clone https://github.com/[seu-usuario]/conecta-doacoes.git](https://github.com/Jpaulo47/conecta_doacoes_web-unifor.git)
 cd conecta-doacoes
 ```
 
