@@ -156,16 +156,34 @@ git clone https://github.com/Jpaulo47/conecta_doacoes_web-unifor.git
 cd conecta-doacoes
 ```
 
-2. **Configure o Firebase** (caso queira usar seu próprio projeto)
+2. **Configure o Firebase** (caso queira rodar localmente)
 
-Edite o arquivo `frontend/web/js/firebase-config.js` com suas credenciais:
+**Opção A - Usar projeto em produção:**
+O sistema já está funcional em: https://conecta-doacoes-fc684.web.app
 
+**Opção B - Configurar seu próprio Firebase:**
+
+a) Copie o template de credenciais:
+```bash
+cd frontend/web/js/
+copy firebase-credentials.example.js firebase-credentials.js
+```
+
+b) Obtenha suas credenciais:
+- Acesse: https://console.firebase.google.com/
+- Crie um projeto Firebase
+- Configurações → Seus aplicativos → Config
+- Copie as credenciais
+
+c) Edite `frontend/web/js/firebase-credentials.js`:
 ```javascript
-const firebaseConfig = {
+export const firebaseCredentials = {
   apiKey: "SUA_API_KEY",
-  authDomain: "SEU_AUTH_DOMAIN",
-  projectId: "SEU_PROJECT_ID",
-  // ...
+  authDomain: "seu-projeto.firebaseapp.com",
+  projectId: "seu-projeto-id",
+  storageBucket: "seu-projeto.firebasestorage.app",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abc123"
 };
 ```
 

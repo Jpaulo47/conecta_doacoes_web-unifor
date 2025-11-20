@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/statistics.css">
     <link rel="stylesheet" href="css/mobile-fix.css">
+    <link rel="stylesheet" href="css/mobile-premium.css">
+    <link rel="stylesheet" href="css/contrast-fix.css">
+    <link rel="stylesheet" href="css/checkbox-spacing.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -41,7 +44,7 @@
                         </a>
                     </li>
                     <li class="nav-item" id="nav-register">
-                        <a class="nav-link btn btn-success text-white ms-2" href="login.html">
+                        <a class="nav-link btn btn-success text-white ms-2" href="login.html" style="background: #198754 !important; color: #ffffff !important; font-weight: 600 !important;">
                             Cadastrar
                         </a>
                     </li>
@@ -90,7 +93,7 @@
                         Contribua para cidades e comunidades mais sustentáveis (ODS 11).
                     </p>
                     <div class="d-flex gap-2">
-                        <a href="login.html" class="btn btn-light btn-lg">
+                        <a href="#" id="btnComecarDoar" class="btn btn-light btn-lg">
                             <i class="bi bi-heart-fill"></i> Começar a Doar
                         </a>
                         <a href="#doacoes" class="btn btn-outline-light btn-lg">
@@ -560,6 +563,20 @@
                     updateUnreadBadge();
                 }
             });
+            
+            // Configurar botão "Começar a Doar"
+            const btnComecarDoar = document.getElementById('btnComecarDoar');
+            if (btnComecarDoar) {
+                auth.onAuthStateChanged((user) => {
+                    if (user) {
+                        // Se estiver logado, vai para cadastrar item
+                        btnComecarDoar.href = 'nova-doacao.html';
+                    } else {
+                        // Se não estiver logado, vai para login
+                        btnComecarDoar.href = 'login.html';
+                    }
+                });
+            }
         });
     </script>
 </body>

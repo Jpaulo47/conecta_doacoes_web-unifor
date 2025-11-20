@@ -1,0 +1,848 @@
+/**
+ * Contrast Fix - Conecta Doações
+ * Melhorias de contraste e legibilidade
+ * Aplicado de forma seletiva para não quebrar design desktop
+ */
+
+/* === CONTRASTE GLOBAL (SELETIVO) === */
+
+/* Textos principais - apenas onde necessário */
+.card-text,
+.message-text,
+.donation-card-text {
+    color: #2d3748 !important;
+    font-weight: 500 !important;
+}
+
+/* Títulos - melhorar apenas cards e sections */
+.card-title,
+.message-from,
+.section-title {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+/* === LINKS - SEM SOBRESCREVER BOTÕES === */
+a:not(.btn):not(.nav-link) {
+    color: #0f6938 !important;
+    font-weight: 500 !important;
+}
+
+a:not(.btn):not(.nav-link):hover {
+    color: #0a4f2a !important;
+}
+
+/* === NAVBAR === */
+.navbar-brand {
+    font-weight: 700 !important;
+}
+
+.navbar .nav-link {
+    font-weight: 500 !important;
+    color: #495057 !important;
+}
+
+.navbar .nav-link:hover {
+    color: #198754 !important;
+}
+
+.navbar .nav-link.active {
+    font-weight: 600 !important;
+}
+
+/* Botão Cadastrar na navbar - MANTER VERDE */
+.navbar .btn-success {
+    background: #198754 !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+
+.navbar .btn-success:hover {
+    background: #157347 !important;
+    color: #ffffff !important;
+}
+
+/* === BOTÕES - MANTER DESIGN ORIGINAL === */
+.btn-primary,
+.btn-success {
+    font-weight: 600 !important;
+}
+
+/* Melhorar apenas legibilidade em mobile */
+@media (max-width: 767.98px) {
+    .btn {
+        font-weight: 700 !important;
+    }
+}
+
+/* === BADGES - MELHORIAS SELETIVAS === */
+.badge {
+    font-weight: 600 !important;
+}
+
+/* Apenas badges de status precisam de cores mais escuras */
+.status-badge.badge {
+    font-weight: 700 !important;
+}
+
+/* Warning com texto escuro para legibilidade */
+.badge.bg-warning {
+    color: #664d03 !important;
+}
+
+/* === CARDS === */
+.card-title {
+    font-weight: 600 !important;
+}
+
+.card-text {
+    color: #495057 !important;
+}
+
+/* Melhorar apenas em mobile */
+@media (max-width: 767.98px) {
+    .card-title {
+        color: #1a1a1a !important;
+        font-weight: 700 !important;
+    }
+    
+    .card-text {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
+    }
+}
+
+/* === FORMULÁRIOS === */
+.form-label {
+    font-weight: 600 !important;
+}
+
+.form-control,
+.form-select {
+    font-weight: 500 !important;
+}
+
+/* Melhorias específicas para mobile */
+@media (max-width: 767.98px) {
+    .form-label {
+        color: #1a1a1a !important;
+        font-weight: 700 !important;
+    }
+    
+    .form-control,
+    .form-select {
+        color: #1a1a1a !important;
+        font-weight: 600 !important;
+    }
+}
+
+/* === STATUS BADGES (Doações) === */
+.status-available {
+    background: #0f6938 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.status-reserved {
+    background: #d97706 !important; /* Laranja mais escuro */
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.status-donated {
+    background: #6b7280 !important; /* Cinza mais escuro */
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* === SIDEBAR === */
+.sidebar .nav-link {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+.sidebar .nav-link.active {
+    font-weight: 700 !important;
+}
+
+.sidebar .logo {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    font-weight: 800 !important;
+}
+
+.sidebar .user-profile {
+    color: #ffffff !important;
+}
+
+/* === MENSAGENS === */
+.message-sent {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.message-received {
+    color: #1a1a1a !important;
+}
+
+.message-card {
+    color: #2d3748 !important;
+}
+
+.message-card strong {
+    color: #1a1a1a !important;
+}
+
+/* === HERO SECTION === */
+.bg-success.bg-gradient,
+.bg-success {
+    color: #ffffff !important;
+}
+
+.bg-success .display-4 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    font-weight: 800 !important;
+}
+
+.bg-success .lead {
+    color: #ffffff !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* === FOOTER === */
+footer {
+    color: #e5e7eb !important;
+}
+
+footer h4,
+footer h5,
+footer h6 {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+footer a {
+    color: #d1d5db !important;
+    font-weight: 500 !important;
+}
+
+footer a:hover {
+    color: #ffffff !important;
+}
+
+footer .text-white {
+    color: #ffffff !important;
+}
+
+footer .text-white-50 {
+    color: #d1d5db !important;
+}
+
+/* === ESTATÍSTICAS === */
+.stat-number {
+    color: #0f6938 !important;
+    font-weight: 800 !important;
+    -webkit-text-fill-color: #0f6938 !important; /* Override gradient */
+    text-fill-color: #0f6938 !important;
+}
+
+.stat-label {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+.stat-description {
+    color: #4a5568 !important;
+    font-weight: 600 !important;
+}
+
+/* === ALERTS === */
+.alert {
+    font-weight: 600 !important;
+}
+
+.alert-success {
+    color: #0a4f2a !important;
+    background: #d1e7dd !important;
+}
+
+.alert-danger {
+    color: #7f1d1d !important;
+    background: #f8d7da !important;
+}
+
+.alert-warning {
+    color: #78350f !important;
+    background: #fff3cd !important;
+}
+
+.alert-info {
+    color: #0c4a6e !important;
+    background: #cff4fc !important;
+}
+
+/* === TABELAS === */
+.table {
+    color: #1a1a1a !important;
+}
+
+.table thead th {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+    background: #e5e7eb !important;
+}
+
+.table tbody td {
+    color: #2d3748 !important;
+    font-weight: 500 !important;
+}
+
+/* === BREADCRUMB === */
+.breadcrumb-item {
+    color: #4a5568 !important;
+    font-weight: 600 !important;
+}
+
+.breadcrumb-item.active {
+    color: #0f6938 !important;
+    font-weight: 700 !important;
+}
+
+/* === LIST GROUP === */
+.list-group-item {
+    color: #2d3748 !important;
+}
+
+.list-group-item strong {
+    color: #1a1a1a !important;
+}
+
+/* === TABS === (APENAS VERSÃO WEB) */
+@media (min-width: 768px) {
+    .nav-tabs .nav-link {
+        color: #495057 !important;
+        font-weight: 700 !important;
+        background: transparent !important;
+    }
+    
+    .nav-tabs .nav-link:hover {
+        color: #0f6938 !important;
+        background: transparent !important;
+    }
+    
+    .nav-tabs .nav-link.active {
+        color: #0f6938 !important;
+        background: transparent !important;
+        border-bottom: 4px solid #0f6938 !important;
+        font-weight: 800 !important;
+    }
+}
+
+/* === MODAL === */
+.modal-title {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+    font-weight: 700 !important;
+}
+
+.modal-body {
+    color: #2d3748 !important;
+}
+
+/* === DROPDOWN === */
+.dropdown-item {
+    color: #2d3748 !important;
+    font-weight: 500 !important;
+}
+
+.dropdown-item:hover {
+    color: #1a1a1a !important;
+    background: #f3f4f6 !important;
+}
+
+/* === PAGINATION === */
+.page-link {
+    color: #0f6938 !important;
+    font-weight: 700 !important;
+}
+
+.page-item.active .page-link {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* === TEXTOS PEQUENOS === */
+small, .small {
+    color: #4a5568 !important;
+    font-weight: 500 !important;
+}
+
+.text-muted {
+    color: #6b7280 !important;
+}
+
+/* === TEXTOS EM FUNDOS ESCUROS === */
+.bg-dark,
+.bg-dark * {
+    color: #ffffff !important;
+}
+
+.bg-dark a {
+    color: #d1d5db !important;
+}
+
+.bg-dark a:hover {
+    color: #ffffff !important;
+}
+
+/* === CATEGORIAS (BADGES) === */
+/* Eletrônicos */
+.badge.bg-primary,
+.category-eletronicos {
+    background: #1e40af !important; /* Azul mais escuro */
+    color: #ffffff !important;
+}
+
+/* Móveis */
+.category-moveis {
+    background: #92400e !important; /* Marrom escuro */
+    color: #ffffff !important;
+}
+
+/* Roupas */
+.category-roupas {
+    background: #a21caf !important; /* Roxo escuro */
+    color: #ffffff !important;
+}
+
+/* Livros */
+.category-livros {
+    background: #b45309 !important; /* Laranja escuro */
+    color: #ffffff !important;
+}
+
+/* Brinquedos */
+.category-brinquedos {
+    background: #be123c !important; /* Rosa escuro */
+    color: #ffffff !important;
+}
+
+/* Outros */
+.category-outros {
+    background: #4b5563 !important; /* Cinza escuro */
+    color: #ffffff !important;
+}
+
+/* === CONDIÇÕES === */
+.condition-novo {
+    background: #0f6938 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+.condition-otimo {
+    background: #0369a1 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+.condition-bom {
+    background: #ca8a04 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+.condition-reparo {
+    background: #b91c1c !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* === DESCRIÇÕES E LABELS === */
+.form-label,
+label {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+.form-text {
+    color: #4a5568 !important;
+    font-weight: 600 !important;
+}
+
+/* === PLACEHOLDERS === */
+::placeholder {
+    color: #9ca3af !important;
+    opacity: 1 !important;
+    font-weight: 500 !important;
+}
+
+/* === DONATION CARDS === */
+.donation-card-title {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+.donation-card-text {
+    color: #374151 !important;
+    font-weight: 500 !important;
+}
+
+/* === LOCATION E METADATA === */
+.text-muted,
+.card-text.text-muted {
+    color: #6b7280 !important;
+    font-weight: 600 !important;
+}
+
+/* === TÍTULOS DE SEÇÃO === */
+.section-title,
+.page-title {
+    color: #1a1a1a !important;
+    font-weight: 800 !important;
+}
+
+/* === BREADCRUMB === */
+.breadcrumb-item {
+    color: #4a5568 !important;
+    font-weight: 700 !important;
+}
+
+.breadcrumb-item a {
+    color: #0f6938 !important;
+    font-weight: 700 !important;
+}
+
+.breadcrumb-item.active {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+/* === MENSAGENS === */
+.message-sent {
+    background: #0f6938 !important; /* Verde mais escuro */
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    font-weight: 600 !important;
+}
+
+.message-received {
+    background: #f3f4f6 !important; /* Cinza mais escuro */
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+}
+
+.message-card {
+    color: #1a1a1a !important;
+}
+
+.message-card .message-from,
+.message-card strong {
+    color: #0f0f0f !important;
+    font-weight: 800 !important;
+}
+
+.message-card .message-item-title {
+    color: #4a5568 !important;
+    font-weight: 700 !important;
+}
+
+.message-card .message-text {
+    color: #2d3748 !important;
+    font-weight: 600 !important;
+    line-height: 1.7 !important;
+}
+
+.message-card .message-date,
+.message-card .small {
+    color: #6b7280 !important;
+    font-weight: 700 !important;
+}
+
+.message-card.unread {
+    border-left: 4px solid #0f6938 !important;
+}
+
+.message-card.unread .message-from {
+    color: #0a4f2a !important;
+}
+
+/* Cards de conversa */
+.conversation-card {
+    border-left: 4px solid #0f6938 !important;
+}
+
+.conversation-card h5 {
+    color: #0f0f0f !important;
+    font-weight: 800 !important;
+}
+
+.conversation-card p {
+    color: #2d3748 !important;
+    font-weight: 600 !important;
+}
+
+.conversation-card .text-muted {
+    color: #6b7280 !important;
+    font-weight: 700 !important;
+}
+
+/* === CONVERSATION HEADER === */
+.conversation-header {
+    background: #0f6938 !important;
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+.conversation-header h5 {
+    color: #ffffff !important;
+}
+
+/* === SEARCH BOX === */
+.search-box input {
+    color: #1a1a1a !important;
+}
+
+.search-box label {
+    color: #1a1a1a !important;
+}
+
+/* === FILTROS === */
+.filter-label {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+/* === USER PROFILE (Sidebar) === */
+.user-profile {
+    color: #ffffff !important;
+}
+
+.user-profile strong {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+.user-profile small {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500 !important;
+}
+
+/* === EMPTY STATES === */
+.empty-state h3 {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+.empty-state p {
+    color: #4a5568 !important;
+    font-weight: 600 !important;
+}
+
+/* === TOOLTIPS === */
+.tooltip-inner {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+/* === PROGRESS === */
+.progress-bar {
+    background: #0f6938 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* === LOGIN/CADASTRO === */
+.login-header h1 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    font-weight: 800 !important;
+}
+
+.login-header p {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+    font-weight: 600 !important;
+}
+
+/* === MOBILE ESPECÍFICO === */
+@media (max-width: 767.98px) {
+    /* Aumentar contraste em todos os textos mobile */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Textos sobre fundo branco */
+    .card, .table-container, .search-box {
+        color: #1a1a1a !important;
+    }
+    
+    /* Títulos principais */
+    h1 {
+        color: #0f0f0f !important;
+        font-weight: 800 !important;
+        font-size: 1.85rem !important;
+    }
+    
+    h2 {
+        color: #1a1a1a !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Parágrafos */
+    p, .card-text {
+        color: #374151 !important;
+        font-size: 1rem !important;
+        line-height: 1.7 !important;
+    }
+    
+    /* Links mais visíveis */
+    a:not(.btn) {
+        color: #0a4f2a !important;
+        font-weight: 700 !important;
+        text-decoration: underline !important;
+    }
+    
+    /* Botões com texto bem legível */
+    .btn {
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+    }
+    
+    /* Inputs com texto escuro */
+    .form-control,
+    .form-select {
+        color: #0f0f0f !important;
+        font-weight: 600 !important;
+        font-size: 1.05rem !important;
+    }
+    
+    /* Labels bem visíveis */
+    .form-label {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        color: #0f0f0f !important;
+    }
+    
+    /* Status badges com mais contraste */
+    .status-badge {
+        font-weight: 800 !important;
+        font-size: 0.9rem !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    /* Tabela com texto escuro */
+    .table {
+        font-size: 0.95rem !important;
+    }
+    
+    .table td,
+    .table th {
+        color: #1a1a1a !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Small text mais legível */
+    small, .small {
+        color: #4a5568 !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Checkbox labels */
+    .form-check-label {
+        color: #1a1a1a !important;
+        font-weight: 600 !important;
+    }
+}
+
+/* === FIX PARA TEXTOS EM GRADIENTES === */
+@media (max-width: 767.98px) {
+    /* Remover text-fill-color transparent em mobile para melhor legibilidade */
+    .navbar-brand {
+        -webkit-text-fill-color: #0f6938 !important;
+        text-fill-color: #0f6938 !important;
+        background: none !important;
+    }
+    
+    .stat-number {
+        -webkit-text-fill-color: #0f6938 !important;
+        text-fill-color: #0f6938 !important;
+        background: none !important;
+    }
+}
+
+/* === ACESSIBILIDADE - WCAG AA === */
+/* Garantir contraste mínimo 4.5:1 para textos normais */
+/* Garantir contraste mínimo 3:1 para textos grandes (18pt+) */
+
+/* Textos em fundos claros */
+.bg-light,
+.bg-white {
+    color: #1a1a1a !important;
+}
+
+/* Textos em fundos médios */
+.bg-secondary {
+    color: #ffffff !important;
+}
+
+/* Textos em fundos escuros */
+.bg-dark,
+.bg-success,
+.bg-primary,
+.bg-danger {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* === INVALID FEEDBACK === */
+.invalid-feedback {
+    color: #991b1b !important; /* Vermelho bem escuro */
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+}
+
+.valid-feedback {
+    color: #065f46 !important; /* Verde bem escuro */
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+}
+
+/* === STRONG E BOLD === */
+strong, b {
+    color: #0f0f0f !important;
+    font-weight: 800 !important;
+}
+
+/* === MELHORAR LEGIBILIDADE EM TELAS PEQUENAS === */
+@media (max-width: 576px) {
+    /* Fonte base ligeiramente maior */
+    body {
+        font-size: 16px !important;
+    }
+    
+    /* Títulos maiores */
+    h1 {
+        font-size: 2rem !important;
+    }
+    
+    /* Parágrafos com mais espaçamento */
+    p {
+        line-height: 1.8 !important;
+    }
+    
+    /* Botões com fonte maior */
+    .btn {
+        font-size: 1.05rem !important;
+    }
+}
+

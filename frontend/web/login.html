@@ -14,6 +14,9 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/mobile-premium.css">
+    <link rel="stylesheet" href="css/contrast-fix.css">
+    <link rel="stylesheet" href="css/checkbox-spacing.css">
     
     <style>
         body {
@@ -41,8 +44,8 @@
         }
         
         .login-header {
-            background: linear-gradient(135deg, #198754 0%, #157347 100%);
-            color: white;
+            background: linear-gradient(135deg, #0f6938 0%, #157347 100%);
+            color: #ffffff;
             text-align: center;
             padding: 30px 20px;
             margin: -40px -40px 30px -40px;
@@ -51,13 +54,17 @@
         
         .login-header h1 {
             font-size: 2rem;
-            font-weight: bold;
+            font-weight: 800;
             margin: 0;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .login-header p {
             margin: 10px 0 0 0;
-            opacity: 0.9;
+            color: #ffffff;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
         
         .nav-tabs {
@@ -66,60 +73,98 @@
         }
         
         .nav-tabs .nav-link {
-            color: #6c757d;
-            font-weight: 600;
-            border: none;
-            padding: 15px 30px;
-            transition: all 0.3s;
+            color: #495057 !important;
+            background: transparent !important;
+            font-weight: 700 !important;
+            border: none !important;
+            padding: 15px 30px !important;
+            transition: all 0.3s !important;
+            font-size: 1.05rem !important;
         }
         
         .nav-tabs .nav-link:hover {
-            color: #198754;
-            border: none;
+            color: #0f6938 !important;
+            background: transparent !important;
+            border: none !important;
         }
         
         .nav-tabs .nav-link.active {
-            color: #198754;
-            border: none;
-            border-bottom: 3px solid #198754;
-            background: transparent;
+            color: #0f6938 !important;
+            background: transparent !important;
+            border: none !important;
+            border-bottom: 4px solid #0f6938 !important;
+            font-weight: 800 !important;
         }
         
         .form-label {
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 8px;
+            font-weight: 800;
+            color: #0f0f0f;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
         }
         
         .form-control {
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
+            padding: 14px 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 10px;
             transition: all 0.3s;
+            color: #0f0f0f;
+            font-weight: 600;
+            font-size: 1.05rem;
         }
         
         .form-control:focus {
-            border-color: #198754;
-            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+            border-color: #0f6938;
+            box-shadow: 0 0 0 4px rgba(15, 105, 56, 0.15);
+            transform: translateY(-1px);
+        }
+        
+        .form-control::placeholder {
+            color: #9ca3af;
+            font-weight: 500;
+            opacity: 1;
         }
         
         .btn-login {
             width: 100%;
             padding: 15px;
-            font-weight: 600;
-            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border-radius: 10px;
             margin-top: 20px;
             transition: all 0.3s;
+            min-height: 52px;
         }
         
         .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 5px 15px rgba(15, 105, 56, 0.3);
+        }
+        
+        .btn-login:active {
+            transform: scale(0.98);
         }
         
         .alert {
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 20px;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .alert-success {
+            background: #d1e7dd;
+            color: #0a4f2a;
+        }
+        
+        .alert-danger {
+            background: #f8d7da;
+            color: #7f1d1d;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            color: #78350f;
         }
         
         .password-toggle {
@@ -135,9 +180,37 @@
             color: #6c757d;
         }
         
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-check-input {
+            width: 1.35rem;
+            height: 1.35rem;
+            border: 2px solid #0f6938;
+            margin: 0;
+            flex-shrink: 0;
+        }
+        
         .form-check-input:checked {
-            background-color: #198754;
-            border-color: #198754;
+            background-color: #0f6938;
+            border-color: #0f6938;
+            box-shadow: 0 0 0 3px rgba(15, 105, 56, 0.15);
+        }
+        
+        .form-check-label {
+            color: #1a1a1a;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0;
+        }
+        
+        .form-check-label a {
+            color: #0f6938;
+            font-weight: 700;
         }
         
         .loading-spinner {

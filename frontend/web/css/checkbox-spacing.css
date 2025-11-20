@@ -1,0 +1,118 @@
+/**
+ * Checkbox Spacing - Conecta Doações
+ * Melhor espaçamento e alinhamento de checkboxes
+ */
+
+/* === ESPAÇAMENTO ENTRE CHECKBOX E LABEL === */
+
+.form-check {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important; /* Espaço entre checkbox e texto */
+    margin-bottom: 0.85rem !important; /* Espaço entre linhas */
+    padding-left: 0 !important;
+}
+
+.form-check-input {
+    width: 1.35rem !important;
+    height: 1.35rem !important;
+    flex-shrink: 0 !important; /* Não encolher */
+    margin: 0 !important;
+    margin-right: 0 !important; /* Gap controla o espaçamento */
+    border: 2px solid #0f6938 !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+}
+
+.form-check-input:checked {
+    background-color: #0f6938 !important;
+    border-color: #0f6938 !important;
+    box-shadow: 0 0 0 3px rgba(15, 105, 56, 0.15) !important;
+}
+
+.form-check-input:focus {
+    border-color: #0f6938 !important;
+    box-shadow: 0 0 0 4px rgba(15, 105, 56, 0.2) !important;
+}
+
+.form-check-label {
+    font-weight: 600 !important;
+    color: #1a1a1a !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+}
+
+/* === MOBILE: ESPAÇAMENTO MAIOR === */
+@media (max-width: 767.98px) {
+    .form-check {
+        gap: 1rem !important; /* Espaço ainda maior no mobile */
+        margin-bottom: 1rem !important;
+        padding: 0.5rem 0 !important; /* Área de toque maior */
+    }
+    
+    .form-check-input {
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+    }
+    
+    .form-check-label {
+        font-size: 1.05rem !important;
+        font-weight: 600 !important;
+    }
+}
+
+/* === FILTROS ESPECIFICAMENTE === */
+.filters-container .form-check,
+.search-box .form-check {
+    gap: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* === RADIO BUTTONS === */
+.form-check-input[type="radio"] {
+    border-radius: 50% !important;
+}
+
+/* === HOVER STATE === */
+.form-check:hover .form-check-input {
+    border-color: #0a4f2a !important;
+    box-shadow: 0 0 0 2px rgba(15, 105, 56, 0.1) !important;
+}
+
+/* === DISABLED STATE === */
+.form-check-input:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
+.form-check-input:disabled ~ .form-check-label {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
+/* === GRUPOS DE CHECKBOXES === */
+.checkbox-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+}
+
+/* === ALINHAMENTO PERFEITO === */
+.form-check {
+    align-items: flex-start !important; /* Alinha ao topo */
+}
+
+.form-check-input {
+    margin-top: 0.2rem !important; /* Pequeno ajuste vertical */
+}
+
+/* === STATUS BADGES NOS CHECKBOXES === */
+.form-check .badge {
+    margin-left: 0.5rem !important;
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+}
+
