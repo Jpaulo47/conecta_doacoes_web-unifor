@@ -14,6 +14,8 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/mobile-fix.css">
+    <link rel="stylesheet" href="css/sidebar-mobile-fix.css">
     
     <style>
         body {
@@ -190,13 +192,77 @@
             font-weight: bold;
             margin-bottom: 8px;
         }
+        /* Botão de menu mobile */
+        .mobile-menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1050;
+            background: #198754;
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+        
+        @media (max-width: 767.98px) {
+            .mobile-menu-btn {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .sidebar {
+                display: none !important;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 280px;
+                height: 100vh;
+                z-index: 1040;
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+                overflow-y: auto;
+            }
+            
+            .sidebar.show {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1030;
+            }
+            
+            .sidebar-overlay.show {
+                display: block;
+            }
+            
+            .main-content {
+                padding: 80px 20px 40px 20px !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" type="button">
+        <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 sidebar d-flex flex-column">
+            <div class="col-md-3 col-lg-2 sidebar d-flex flex-column" id="sidebar">
                 <div class="logo">
                     <i class="bi bi-heart-fill"></i> Conecta Doações
                     <div class="small mt-2" style="opacity: 0.9;">
@@ -237,7 +303,7 @@
             </div>
             
             <!-- Main Content -->
-            <div class="col-md-9 col-lg-10 main-content">
+            <div class="col-12 col-md-9 col-lg-10 main-content">
                 <h1 class="mb-3">Cadastrar Novo Item</h1>
                 <p class="text-muted mb-4">
                     Preencha os campos abaixo para listar seu item para doação.
@@ -574,6 +640,50 @@
     
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para Sidebar Mobile -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    sidebar.classList.add('show');
+                    overlay.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            if (overlay) {
+                overlay.addEventListener('click', function() {
+                    closeSidebar();
+                });
+            }
+            
+            if (sidebar && window.innerWidth < 768) {
+                const sidebarLinks = sidebar.querySelectorAll('a');
+                sidebarLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        setTimeout(() => closeSidebar(), 100);
+                    });
+                });
+            }
+            
+            function closeSidebar() {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+            
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    closeSidebar();
+                }
+            });
+        });
+    </script>
     
     <!-- Firebase e Lógica -->
     <script type="module">

@@ -1,0 +1,172 @@
+/* 
+ * Conecta Doações - Correções para Mobile
+ * Soluciona problema do menu não fechar ao clicar
+ */
+
+/* ===================================
+   MELHORIAS PARA MOBILE
+   =================================== */
+
+/* Garantir que o menu mobile feche suavemente */
+.navbar-collapse {
+    transition: height 0.35s ease, opacity 0.35s ease;
+}
+
+/* FORÇAR o menu a fechar quando não tem .show */
+@media (max-width: 991.98px) {
+    .navbar-collapse:not(.show) {
+        display: none !important;
+        height: 0 !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    
+    .navbar-collapse.show {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Remover animações do Bootstrap que podem interferir */
+    .navbar-collapse.collapsing {
+        height: 0 !important;
+        transition: none !important;
+        display: none !important;
+    }
+    
+    /* IMPORTANTE: Menu não deve cobrir tela inteira */
+    .navbar-collapse {
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+    }
+    
+    /* Garantir que o conteúdo principal seja visível quando menu fechado */
+    body {
+        overflow-x: hidden !important;
+    }
+    
+    /* Quando menu está aberto, prevenir scroll do body */
+    body.menu-open {
+        overflow: hidden !important;
+    }
+}
+
+/* Melhorar área de toque em dispositivos móveis */
+@media (max-width: 991.98px) {
+    .nav-link {
+        padding: 0.75rem 1rem !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        display: block;
+        width: 100%;
+    }
+    
+    .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+    
+    /* Aumentar área de toque dos botões */
+    .btn {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Menu mobile com fundo branco sólido */
+    .navbar-collapse {
+        background: white;
+        margin-top: 0.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 0;
+    }
+    
+    /* Espaçamento nos itens do menu mobile */
+    .navbar-nav {
+        padding: 0;
+    }
+    
+    /* Remover margin dos botões no mobile */
+    .navbar-nav .btn {
+        margin: 0.5rem 1rem !important;
+        width: calc(100% - 2rem);
+    }
+    
+    /* Garantir que o toggle funciona corretamente */
+    .navbar-toggler {
+        border: 2px solid #198754;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    }
+    
+    /* Melhorar aparência do badge de mensagens não lidas no mobile */
+    .badge {
+        font-size: 0.65rem;
+        padding: 0.25em 0.5em;
+    }
+    
+    /* Garantir que o conteúdo principal não fique escondido atrás do menu */
+    body {
+        overflow-x: hidden;
+    }
+    
+    /* Ajustar z-index para garantir que o menu fique sobre o conteúdo */
+    .navbar {
+        z-index: 1030;
+    }
+    
+    .navbar-collapse.show,
+    .navbar-collapse.collapsing {
+        z-index: 1029;
+    }
+}
+
+/* Tablets e dispositivos médios */
+@media (max-width: 768px) {
+    /* Aumentar ainda mais a área de toque em telas menores */
+    .nav-link {
+        padding: 1rem 1rem !important;
+        font-size: 1.05rem;
+    }
+    
+    /* Melhorar espaçamento vertical */
+    .navbar-nav {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Telefones pequenos */
+@media (max-width: 576px) {
+    /* Logo menor em telas pequenas */
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    /* Botão de toggle maior */
+    .navbar-toggler {
+        padding: 0.6rem 0.9rem;
+    }
+    
+    /* Menu ocupa mais espaço vertical em telas pequenas */
+    .navbar-collapse {
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+}
+
+/* Animação suave ao abrir/fechar menu */
+.navbar-collapse.collapsing {
+    transition: height 0.3s ease;
+}
+
+/* Garantir que o backdrop não interfira */
+.navbar-collapse.show {
+    position: relative;
+}
+

@@ -21,7 +21,16 @@ Armazena informações dos usuários cadastrados.
   uid: string,              // ID do Firebase Auth (Document ID)
   name: string,             // Nome completo do usuário
   email: string,            // E-mail (único)
-  location: string,         // Cidade/região do usuário
+  location: string,         // Cidade/região (compatibilidade)
+  address: {                // Endereço completo estruturado
+    cep: string,            // CEP (8 dígitos)
+    logradouro: string,     // Nome da rua/avenida
+    numero: string,         // Número do imóvel
+    complemento: string,    // Complemento (opcional)
+    bairro: string,         // Bairro
+    cidade: string,         // Cidade
+    uf: string              // Estado (sigla)
+  },
   createdAt: timestamp,     // Data de criação da conta
   updatedAt: timestamp      // Data da última atualização
 }
@@ -34,15 +43,30 @@ Armazena informações dos usuários cadastrados.
   uid: "abc123xyz789",
   name: "João Silva",
   email: "joao.silva@example.com",
-  location: "Fortaleza, CE",
+  location: "Fortaleza, CE - Centro",
+  address: {
+    cep: "60355650",
+    logradouro: "Rua João Pessoa",
+    numero: "123",
+    complemento: "Apto 101",
+    bairro: "Centro",
+    cidade: "Fortaleza",
+    uf: "CE"
+  },
   createdAt: Timestamp(2025-11-19 10:30:00),
   updatedAt: Timestamp(2025-11-19 10:30:00)
 }
 ```
 
 **Índices:**
-- `uid` (automático)
+- `uid` (automático - document ID)
 - `email` (para buscas)
+
+**Campos Obrigatórios:**
+- `uid`, `name`, `email`, `address`, `createdAt`, `updatedAt`
+
+**Campos Opcionais:**
+- `location` (mantido para compatibilidade)
 
 ---
 
@@ -63,8 +87,10 @@ Armazena os itens disponíveis para doação.
   description: string,      // Descrição detalhada
   category: string,         // Categoria do item
   condition: string,        // Estado/condição do item
-  location: string,         // Localização do item
-  imageUrl: string,         // URL da foto
+  location: string,         // Localização do item (string formatada)
+  address: object,          // Endereço completo do usuário (opcional)
+  imageUrls: array,         // Array de URLs de imagens (até 3)
+  imageUrl: string,         // URL da primeira foto (compatibilidade)
   status: string,           // Status: available, reserved, donated
   createdAt: timestamp,     // Data de criação
   updatedAt: timestamp      // Data da última atualização
@@ -103,8 +129,22 @@ Armazena os itens disponíveis para doação.
   description: "Sofá em ótimo estado, cor bege, muito confortável.",
   category: "Móveis",
   condition: "Usado - Ótimo",
-  location: "Fortaleza, CE - Bairro Aldeota",
-  imageUrl: "https://example.com/sofa.jpg",
+  location: "Fortaleza, CE - Aldeota",
+  address: {
+    cep: "60150160",
+    logradouro: "Rua Silva Jatahy",
+    numero: "456",
+    complemento: "Casa",
+    bairro: "Aldeota",
+    cidade: "Fortaleza",
+    uf: "CE"
+  },
+  imageUrls: [
+    "https://example.com/sofa1.jpg",
+    "https://example.com/sofa2.jpg",
+    "https://example.com/sofa3.jpg"
+  ],
+  imageUrl: "https://example.com/sofa1.jpg",
   status: "available",
   createdAt: Timestamp(2025-11-19 11:00:00),
   updatedAt: Timestamp(2025-11-19 11:00:00)
@@ -116,6 +156,13 @@ Armazena os itens disponíveis para doação.
 - `status` (para filtrar doações disponíveis)
 - `category` (para filtros)
 - `createdAt` (para ordenação)
+
+**Campos Obrigatórios:**
+- `userId`, `userName`, `title`, `description`, `category`, `condition`, `location`, `imageUrls`, `status`, `createdAt`, `updatedAt`
+
+**Campos Opcionais:**
+- `address` (endereço completo do usuário)
+- `imageUrl` (compatibilidade - primeira imagem do array)
 
 ---
 

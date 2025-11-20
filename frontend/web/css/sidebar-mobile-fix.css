@@ -1,0 +1,72 @@
+/**
+ * Fix ULTRA AGRESSIVO para Sidebar Mobile
+ * Garante que sidebar fique escondida no mobile
+ */
+
+/* === MOBILE: ESCONDER SIDEBAR POR PADRÃO === */
+@media (max-width: 767.98px) {
+    /* Esconder QUALQUER coluna com classe sidebar */
+    .col-md-3.sidebar,
+    .col-lg-2.sidebar,
+    [class*="col-"].sidebar {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
+    }
+    
+    /* Quando tem classe .show, MOSTRAR como offcanvas */
+    .sidebar.show {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 280px !important;
+        height: 100vh !important;
+        z-index: 1040 !important;
+        overflow-y: auto !important;
+        pointer-events: auto !important;
+        flex-direction: column !important;
+        box-shadow: 5px 0 20px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    /* Container-fluid e row sem gaps no mobile */
+    .container-fluid > .row {
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    
+    /* Main content ocupa 100% da largura */
+    .main-content,
+    .col-md-9.main-content,
+    .col-lg-10.main-content,
+    .col-12.main-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 80px 15px 40px 15px !important;
+        margin: 0 !important;
+        flex: 0 0 100% !important;
+    }
+}
+
+/* === DESKTOP: LAYOUT NORMAL === */
+@media (min-width: 768px) {
+    /* Garantir que no desktop a sidebar sempre apareça */
+    .sidebar {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .mobile-menu-btn,
+    .sidebar-overlay {
+        display: none !important;
+    }
+}
+

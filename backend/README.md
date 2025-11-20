@@ -10,21 +10,22 @@ Este projeto utiliza **Firebase** como solução de backend completa, eliminando
 - Gerenciamento completo de usuários
 - Método de autenticação: Email/Password
 - Funcionalidades:
-  - Cadastro de novos usuários
+  - Cadastro de novos usuários com endereço completo
+  - Integração com ViaCEP para busca automática de endereço
   - Login/Logout
-  - Recuperação de senha
   - Gestão de sessão
 
 ### 2. **Cloud Firestore**
 - Banco de dados NoSQL em tempo real
 - Collections utilizadas:
-  - `users` - Dados dos usuários
-  - `donations` - Itens para doação
-  - `messages` - Mensagens entre usuários
+  - `users` - Dados dos usuários com endereço completo
+  - `donations` - Itens para doação com múltiplas imagens
+  - `messages` - Mensagens entre usuários com sistema de threads
 
-### 3. **Firebase Storage** (Opcional)
+### 3. **Firebase Storage**
 - Armazenamento de imagens dos itens
-- Alternativa: URLs externas de imagens
+- Suporte a múltiplas imagens (até 3 por item)
+- URLs públicas para acesso às imagens
 
 ### 4. **Firebase Hosting**
 - Deploy da aplicação web
@@ -69,13 +70,20 @@ docs/api/api_documentation.md
 ✅ **Custo reduzido**
 - Plano gratuito suficiente para MVP
 
-## Limitações do MVP
+## Justificativa da Arquitetura
 
-❌ Não possui API REST própria (conforme especificação)
-❌ Não possui servidor Node.js/Express
-✅ Todas as operações são realizadas diretamente via Firebase SDK
+✅ **Firebase como Backend-as-a-Service (BaaS)**
+- A proposta N708 lista Firebase como ferramenta oficial
+- Firebase fornece backend completo (autenticação, banco de dados, storage)
+- Elimina necessidade de servidor próprio
+- Todas as operações são realizadas via Firebase SDK
 
----
+✅ **Benefícios para o MVP:**
+- Desenvolvimento mais rápido e focado nas funcionalidades
+- Escalabilidade automática
+- Segurança integrada (Security Rules)
+- Custo zero (plano gratuito)
+- Deploy simplificado
 
-**Nota:** Esta arquitetura está alinhada com os requisitos da Etapa 2 (N708) que especifica o uso de Firebase como backend.
+**Nota:** Esta arquitetura está totalmente alinhada com os requisitos da Etapa 2 (N708) que especifica o uso de Firebase como backend.
 

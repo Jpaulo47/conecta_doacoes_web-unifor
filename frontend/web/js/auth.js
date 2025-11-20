@@ -261,16 +261,30 @@ function getErrorMessage(errorCode) {
  * Configura o botão de logout na navbar
  */
 document.addEventListener('DOMContentLoaded', () => {
-    const btnLogout = document.getElementById('btn-logout');
-    if (btnLogout) {
-        btnLogout.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const result = await signOutUser();
-            if (result.success) {
-                window.location.href = 'index.html';
-            }
-        });
-    }
+    // Aguardar um pouco para garantir que mobile-menu-fix.js já configurou
+    setTimeout(() => {
+        const btnLogout = document.getElementById('btn-logout');
+        if (btnLogout) {
+            btnLogout.addEventListener('click', async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('🚪 [AUTH] Logout iniciado');
+                
+                // Fechar menu imediatamente
+                const menu = document.getElementById('navbarNav');
+                if (menu) {
+                    menu.classList.remove('show');
+                    menu.style.display = 'none';
+                }
+                
+                const result = await signOutUser();
+                if (result.success) {
+                    window.location.href = 'index.html';
+                }
+            }, true); // Usar capture
+        }
+    }, 300);
 });
 
 // Exportar auth state listener e auth para uso em outras páginas
