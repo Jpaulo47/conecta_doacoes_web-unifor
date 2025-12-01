@@ -85,5 +85,3 @@ docs/api/api_documentation.md
 - Custo zero (plano gratuito)
 - Deploy simplificado
 
-**Nota:** Esta arquitetura está totalmente alinhada com os requisitos da Etapa 2 (N708) que especifica o uso de Firebase como backend.
-
