@@ -292,6 +292,20 @@ Possíveis melhorias para versões futuras:
 
 ---
 
+## Observação sobre schema.sql
+
+**Nota Importante:** Este projeto utiliza **Cloud Firestore** (banco de dados NoSQL do Firebase), que não utiliza SQL. Por isso, não existe um arquivo `schema.sql` tradicional.
+
+A proposta de trabalho (N708) menciona `database/schema.sql`, mas como o Firestore é um banco NoSQL baseado em documentos, o modelo de dados está documentado neste arquivo (`schema.md`) que descreve as **collections** e **documents** do Firestore.
+
+**Estrutura equivalente:**
+- **SQL:** Tabelas → Colunas → Linhas
+- **Firestore:** Collections → Documents → Fields
+
+Para mais informações sobre o modelo de dados, consulte as seções acima que descrevem as collections `users`, `donations` e `messages`.
+
+---
+
 **Última Atualização:** 19/11/2025  
-**Versão:** 1.0
+**Versão:** 2.0
 

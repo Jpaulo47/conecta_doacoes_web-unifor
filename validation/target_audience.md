@@ -1,58 +1,99 @@
 # Definição do Público-Alvo - Conecta Doações
 
-**Data:** [DATA DA DEFINIÇÃO]  
+**Data:** 27/11/2025  
 **Projeto:** Conecta Doações - MVP Etapa 2 (N708)
 
 ---
 
 ## 1. Identificação do Público-Alvo
 
-### 1.1 Dados Principais
+### 1.1 Público-Alvo Principal
 
-**Nome Completo:** [Nome da pessoa ou instituição]
+O público-alvo da validação foi composto por **14 participantes** de **4 instituições educacionais** e **1 conselho comunitário**, distribuídos em **5 municípios do Ceará**.
 
-**Cargo/Função:** [Ex: Presidente da Associação, Coordenador, etc.]
+### 1.2 Instituições Participantes
 
-**Organização/Instituição:** [Nome completo da organização]
+#### Escola Francisco Silva de Freitas (Cascavel/CE)
+- **Localização:** Cascavel/CE
+- **Participantes:** 4 pessoas
+- **Perfis:** Coordenadora, Professora, Auxiliar de Apoio à Inclusão, Estudante
+- **Contexto:** Escola pública que trabalha com doações para famílias de alunos em situação de vulnerabilidade
 
-**Localização Específica:**
-- **Endereço:** [Rua, número, complemento]
-- **Bairro:** [Nome do bairro]
-- **Cidade/Estado:** [Cidade, UF]
-- **CEP:** [00000-000]
+#### Escola Professora Verônica Pereira de Araújo (Pindoretama/CE)
+- **Localização:** Pindoretama/CE
+- **Participantes:** 3 pessoas
+- **Perfis:** Funcionária, Pais/Responsáveis
+- **Contexto:** Escola pública com ações de assistência social e doações
 
-**Contato:**
-- **Telefone:** [(00) 00000-0000]
-- **E-mail:** [email@exemplo.com]
-- **Melhor horário para contato:** [Horário]
+#### Escola Barros de Pinho (Caucaia/CE)
+- **Localização:** Caucaia/CE
+- **Participantes:** 2 pessoas
+- **Perfis:** Pais/Responsáveis
+- **Contexto:** Escola pública atendendo comunidade do Pecém
+
+#### Escola Saul Gomes (Caucaia/CE)
+- **Localização:** Caucaia/CE
+- **Participantes:** 1 pessoa
+- **Perfil:** Mãe de aluno
+- **Contexto:** Escola pública com ações sociais
+
+#### Conselho do Idoso de Pindoretama/CE
+- **Localização:** Pindoretama/CE
+- **Participantes:** 1 pessoa
+- **Perfil:** Membro do Conselho
+- **Contexto:** Órgão público que gerencia doações e assistência social
+
+### 1.3 Distribuição Geográfica
+
+| Município | Quantidade | Percentual |
+|-----------|------------|------------|
+| Cascavel/CE | 4 | 28,6% |
+| Pindoretama/CE | 3 | 21,4% |
+| Caucaia/CE | 3 | 21,4% |
+| Fortaleza/CE | 3 | 21,4% |
+| Parambu/CE | 1 | 7,1% |
+
+**Total:** 14 participantes de 5 municípios
 
 ---
 
 ## 2. Contexto e Caracterização
 
-### 2.1 Sobre a Organização/Pessoa
+### 2.1 Sobre as Instituições
 
 **Descrição da atividade:**
-[Descreva o que a organização/pessoa faz, quantas pessoas atende, qual seu papel na comunidade]
-
-**Tempo de atuação:**
-[Há quanto tempo trabalha nesta área]
-
-**Público atendido:**
-[Quantas pessoas/famílias são atendidas, perfil do público]
+As instituições participantes são escolas públicas e um conselho comunitário que trabalham diretamente com comunidades em situação de vulnerabilidade social. Elas atuam como intermediárias entre doadores e beneficiários, organizando campanhas de doação, bazares solidários e distribuição de itens para famílias necessitadas.
 
 **Atividades relacionadas a doações:**
-[Descreva se já trabalham com doações, como é feito atualmente, frequência]
+- Campanhas de arrecadação de roupas, calçados, brinquedos e material escolar
+- Organização de bazares solidários
+- Distribuição de doações para famílias cadastradas
+- Controle manual de itens recebidos e doados
+- Comunicação via grupos de WhatsApp e redes sociais
+
+**Público atendido:**
+- Famílias de alunos em situação de vulnerabilidade
+- Comunidades carentes dos municípios
+- Idosos em situação de risco social
+- População de baixa renda
 
 ### 2.2 Problemas e Necessidades Identificadas
 
 **Principais desafios:**
-1. [Desafio 1 - ex: "Dificuldade em organizar doações recebidas"]
-2. [Desafio 2 - ex: "Falta de canais para conectar doadores e beneficiários"]
-3. [Desafio 3 - ex: "Controle manual em cadernos gera confusão"]
+1. **Organização:** Controle manual de doações em cadernos e planilhas, gerando confusão e perda de informações
+2. **Comunicação:** Dificuldade em conectar doadores com beneficiários de forma eficiente
+3. **Visibilidade:** Falta de canal centralizado para divulgar itens disponíveis
+4. **Tempo:** Processo manual consome muito tempo dos profissionais da educação
+5. **Rastreabilidade:** Dificuldade em acompanhar o status das doações (disponível, reservado, doado)
 
 **Como o sistema pode ajudar:**
-[Explique como o Conecta Doações pode resolver os problemas específicos deste público-alvo]
+O Conecta Doações pode:
+- Centralizar todas as doações em uma plataforma única
+- Facilitar a busca e filtragem de itens por categoria e localização
+- Automatizar a comunicação entre doadores e interessados
+- Reduzir o tempo gasto em organização manual
+- Melhorar a rastreabilidade com status atualizados em tempo real
+- Ampliar o alcance das doações para além da comunidade escolar
 
 ---
 
@@ -60,10 +101,31 @@
 
 ### Por que este público-alvo é adequado?
 
-1. **Relevância:** [Ex: "Trabalha diretamente com doações na comunidade"]
-2. **Representatividade:** [Ex: "Atende 500 famílias, representa bem o público final"]
-3. **Acessibilidade:** [Ex: "Disponível para participar da validação"]
-4. **Impacto:** [Ex: "Feedback pode melhorar significativamente o sistema"]
+1. **Relevância:** 
+   - Trabalham diretamente com doações na prática diária
+   - Conhecem as necessidades reais das comunidades
+   - Têm experiência com os desafios de organizar doações
+
+2. **Representatividade:** 
+   - Atendem centenas de famílias em situação de vulnerabilidade
+   - Representam diferentes perfis: profissionais da educação, pais, membros da comunidade
+   - Distribuição geográfica diversificada (5 municípios)
+
+3. **Acessibilidade:** 
+   - Disponíveis para participar da validação
+   - Interesse genuíno em melhorar processos de doação
+   - Acesso a tecnologia (celular/computador)
+
+4. **Impacto:** 
+   - Feedback pode melhorar significativamente o sistema
+   - Validação com usuários reais que usarão o sistema
+   - Potencial de adoção imediata após validação
+
+5. **Diversidade:**
+   - 42,9% Pais/Responsáveis (beneficiários finais)
+   - 35,7% Profissionais da Educação (intermediários)
+   - 14,3% Membros da Comunidade (doadores e beneficiários)
+   - 7,1% Conselho Comunitário (gestores)
 
 ---
 
@@ -71,20 +133,31 @@
 
 ### O que esperamos validar:
 
-- [ ] Usabilidade das principais funcionalidades
-- [ ] Adequação das categorias de itens
-- [ ] Clareza do processo de doação
-- [ ] Sistema de mensagens
-- [ ] Facilidade de cadastro e login
-- [ ] Outros: [especificar]
+- [x] Usabilidade das principais funcionalidades
+- [x] Adequação das categorias de itens
+- [x] Clareza do processo de doação
+- [x] Sistema de mensagens
+- [x] Facilidade de cadastro e login
+- [x] Percepção de utilidade do sistema
+- [x] Aspectos mais valorizados pelos usuários
+- [x] Sugestões de melhorias
 
-### Perguntas-chave a serem respondidas:
+### Perguntas-chave respondidas:
 
-1. O sistema é fácil de usar?
-2. As funcionalidades atendem às necessidades reais?
-3. Falta alguma funcionalidade importante?
-4. Há algo que dificulta o uso?
-5. O público-alvo usaria o sistema regularmente?
+1. ✅ **O sistema é fácil de usar?** 
+   - **Resposta:** 78,6% acharam fácil, 21,4% ainda aprendendo, 0% tiveram dificuldades
+
+2. ✅ **As funcionalidades atendem às necessidades reais?**
+   - **Resposta:** 100% confirmaram que o sistema seria útil
+
+3. ✅ **Falta alguma funcionalidade importante?**
+   - **Resposta:** 2 sugestões principais: integração com mapas e maior presença em redes sociais
+
+4. ✅ **Há algo que dificulta o uso?**
+   - **Resposta:** Nenhuma dificuldade significativa reportada
+
+5. ✅ **O público-alvo usaria o sistema regularmente?**
+   - **Resposta:** 100% confirmaram que usariam
 
 ---
 
@@ -92,10 +165,12 @@
 
 **Autorização para uso de imagem e depoimento:**
 
-- [ ] Termo de autorização assinado (arquivo em `evidence/termo_autorizacao.pdf`)
-- [ ] Autorização para uso de fotos
-- [ ] Autorização para uso de vídeos
-- [ ] Autorização para citação de nome e organização
+- [x] Termo de autorização assinado (arquivo em `evidence/termo_autorizacao.pdf`)
+- [x] Autorização para uso de dados acadêmicos (100% dos participantes)
+- [x] Autorização para citação de nome e organização
+- [x] Dados coletados via formulário Google Forms com consentimento explícito
+
+**Taxa de autorização:** 100% (14/14 participantes)
 
 ---
 
@@ -103,62 +178,92 @@
 
 | Data | Tipo de Contato | Observações |
 |------|-----------------|-------------|
-| [DD/MM/AAAA] | [Telefone/E-mail/Presencial] | [Breve descrição do contato] |
-| [DD/MM/AAAA] | [Agendamento da validação] | [Detalhes combinados] |
+| 20-25/11/2025 | Contato inicial | Contato com diretores e coordenadores das escolas |
+| 25/11/2025 | Agendamento | Agendamento de apresentações presenciais nas escolas |
+| 27/11/2025 | Apresentação presencial | Escola Francisco Silva de Freitas (Cascavel) |
+| 28/11/2025 | Apresentação presencial | Escola Professora Verônica Pereira de Araújo (Pindoretama) |
+| 27-30/11/2025 | Coleta de feedback | Formulário online enviado aos participantes |
+| 30/11/2025 | Análise dos dados | Compilação e análise estatística dos feedbacks |
 
 ---
 
-## 📝 Modelo de Preenchimento (EXEMPLO)
+## 7. Metodologia de Validação
 
-### Exemplo Correto:
+### 7.1 Apresentação Presencial
 
-**Nome Completo:** Maria da Silva Santos
+**Formato:**
+- Demonstração do sistema funcionando em tempo real
+- Explicação das funcionalidades principais
+- Sessão de perguntas e respostas
+- Distribuição de link para formulário de feedback
 
-**Cargo/Função:** Presidente
+**Duração:** 30-45 minutos por apresentação
 
-**Organização/Instituição:** Associação de Moradores do Conjunto Ceará
+### 7.2 Coleta de Feedback
 
-**Localização Específica:**
-- **Endereço:** Rua das Flores, nº 123
-- **Bairro:** Conjunto Ceará
-- **Cidade/Estado:** Fortaleza, CE
-- **CEP:** 60000-000
+**Instrumento:** Formulário Google Forms estruturado
 
-**Contato:**
-- **Telefone:** (85) 98888-8888
-- **E-mail:** maria.associacao@exemplo.com
-- **Melhor horário:** Terças e quintas, 14h-17h
+**Conteúdo:**
+- Informações demográficas (nome, localização, vínculo institucional)
+- Experiência de navegação (fácil/médio/difícil)
+- Percepção de utilidade (sim/talvez/não)
+- Aspectos mais apreciados (múltipla escolha)
+- Campo aberto para sugestões
+- Autorização de uso de dados
 
-**Descrição da atividade:**
-"A Associação de Moradores do Conjunto Ceará atua há 15 anos no bairro, atendendo aproximadamente 500 famílias. Realizamos bazar solidário mensalmente onde recebemos e distribuímos doações de roupas, móveis, eletrodomésticos e outros itens. Atualmente o controle é manual em caderno, o que gera dificuldades de organização."
-
-**Como o sistema pode ajudar:**
-"O Conecta Doações pode facilitar a organização das doações, permitindo que moradores cadastrem itens diretamente, outros vejam o que está disponível e agendem retirada através do sistema de mensagens, reduzindo trabalho manual e melhorando a distribuição."
-
----
-
-### ❌ Exemplo Incorreto (muito genérico):
-
-**Nome Completo:** Comerciantes em geral
-
-**Organização:** Mercados do bairro
-
-**Localização:** Fortaleza
-
-❌ **PROBLEMA:** Não é específico. Não identifica pessoa ou instituição concreta.
+**Período de coleta:** 27 a 30 de novembro de 2025
 
 ---
 
-**⚠️ IMPORTANTE:**
+## 8. Resultados da Validação
 
-1. O público-alvo deve ser REAL e ESPECÍFICO
-2. Você deve ter CONTATO REAL com esta pessoa/organização
-3. Não invente ou generalize o público-alvo
-4. A validação deve ser PRESENCIAL ou por VIDEOCONFERÊNCIA (com gravação)
-5. Guarde TODAS as evidências (fotos, e-mails, termos assinados)
+### 8.1 Taxa de Participação
+
+- **Convidados:** 14 pessoas
+- **Respondentes:** 14 pessoas
+- **Taxa de resposta:** 100%
+
+### 8.2 Principais Resultados
+
+**Facilidade de uso:**
+- 78,6% acharam fácil de usar
+- 21,4% ainda aprendendo (curva de aprendizado normal)
+- 0% tiveram dificuldades significativas
+
+**Percepção de utilidade:**
+- 100% confirmaram que o sistema seria útil
+- 0% rejeição ao conceito
+
+**Aspectos mais valorizados:**
+1. Ideia de ajudar pessoas e comunidades (85,7%)
+2. Organização das doações e cadastros (78,6%)
+3. Facilidade de usar o site (64,3%)
+4. Rapidez para fazer ou solicitar doação (64,3%)
+
+### 8.3 Sugestões Recebidas
+
+1. **Integração com mapas** (prioridade alta)
+   - Sugerido por: Maria Valéria de Araújo (Coordenadora)
+   - Justificativa: Facilitar visualização de pontos de doação
+
+2. **Maior presença em redes sociais** (prioridade média)
+   - Sugerido por: Marcos Antônio Amaral Silva (Conselho do Idoso)
+   - Justificativa: Ampliar alcance e divulgação
 
 ---
 
-**Última Atualização:** [DATA]  
-**Responsável:** [SEU NOME]
+## 9. Conclusão
 
+O público-alvo escolhido foi altamente adequado para a validação do sistema Conecta Doações. As instituições participantes representam usuários reais que trabalham diariamente com doações e enfrentam os problemas que o sistema busca resolver.
+
+A validação foi bem-sucedida, com **100% de aprovação** e **zero críticas negativas**, demonstrando que o sistema atende às necessidades reais do público-alvo e tem potencial de adoção imediata.
+
+**Próximos passos:**
+- Implementar sugestões de melhorias priorizadas
+- Expandir validação para outras instituições
+- Planejar estratégia de divulgação em redes sociais
+
+---
+
+**Última Atualização:** 30/11/2025  
+**Responsável:** Equipe de Desenvolvimento Conecta Doações

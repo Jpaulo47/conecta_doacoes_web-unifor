@@ -1,0 +1,48 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Firebase Credentials (IMPORTANTE - NÃO COMMITAR)
+# Arquivo com chaves de API não deve ir para o repositório
+frontend/web/js/firebase-credentials.js
+
+# Arquivos temporários de resumo/debug
+LIMPEZA_PROJETO.md
+ATUALIZACOES_FINAIS.md
+RESUMO_COMPLETO_ATUALIZACOES.md
+
+# Build
+dist/
+build/
+
+# Temporary files
+*.log
+*.tmp
+.cache/
+

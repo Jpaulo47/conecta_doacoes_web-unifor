@@ -72,6 +72,20 @@ Este projeto contribui diretamente para a **Meta 11.6**:
   - Navbar dinâmica baseada em autenticação
   - Cards visuais de doações
 
+### 📸 Screenshots das Telas Principais
+
+#### Home Page - Listagem de Doações
+![Home Page](Captura%20de%20tela%202025-12-01%20200528.png)
+
+#### Home Page - Listagem de Doações
+![Login/Cadastro](Captura%20de%20tela%202025-12-01%20200628.png)
+
+#### Cadastro de Nova Doação
+![Nova Doação](Captura%20de%20tela%202025-12-01%20200739.png)
+
+#### Gerenciamento de doações
+![Mensagens](Captura%20de%20tela%202025-12-01%20200811.png)
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -293,32 +307,75 @@ conecta-doacoes/
 
 ## 👥 Validação com Público-Alvo
 
-**Status:** 📋 Estrutura preparada - Aguardando realização
+**Status:** ✅ **Concluída com Sucesso**
 
-### Próximos Passos
+### Resumo da Validação
 
-A validação será realizada com instituições e pessoas específicas que trabalham com doações. A estrutura completa de documentação foi preparada:
+A validação foi realizada entre **27 e 30 de novembro de 2025** com **14 participantes** de **4 instituições educacionais** e **1 conselho comunitário**, distribuídos em **5 municípios do Ceará**.
 
-- ✅ Templates de documentação criados
-- ✅ Questionário estruturado preparado
-- ✅ Guia completo de instruções disponível
-- 📅 Agendamento com público-alvo em andamento
+### Público-Alvo
 
-**Documentação:**
-- 📝 [Instruções completas para validação](validation/INSTRUCOES_VALIDACAO.md)
-- 📋 [Template de definição de público-alvo](validation/target_audience.md)
-- 📊 [Template de relatório de validação](validation/validation_report.md)
+**Instituições Participantes:**
+- Escola Francisco Silva de Freitas (Cascavel/CE) - 4 participantes
+- Escola Professora Verônica Pereira de Araújo (Pindoretama/CE) - 3 participantes
+- Escola Barros de Pinho (Caucaia/CE) - 2 participantes
+- Escola Saul Gomes (Caucaia/CE) - 1 participante
+- Conselho do Idoso de Pindoretama/CE - 1 participante
 
-Após a validação, os feedbacks coletados serão analisados e melhorias serão implementadas no sistema.
+**Perfis dos Participantes:**
+- 42,9% Pais/Responsáveis
+- 35,7% Profissionais da Educação
+- 14,3% Membros da Comunidade
+- 7,1% Conselho Comunitário
+
+### Resultados da Validação
+
+**Taxa de Aprovação:** 100% (unanimidade)  
+**Facilidade de Uso:** 78,6% acharam fácil de usar  
+**Índice de Satisfação Composto (ISC):** 86,43% (Excelente)  
+**Net Promoter Score (NPS):** 100 (Excepcional)
+
+### Principais Feedbacks
+
+**Pontos Positivos:**
+- ✅ Ideia de ajudar pessoas e comunidades (85,7%)
+- ✅ Organização das doações e cadastros (78,6%)
+- ✅ Facilidade de uso (64,3%)
+- ✅ Rapidez no processo (64,3%)
+
+**Sugestões de Melhoria:**
+- 🔧 Integração com mapas para visualizar pontos de doação - ✅ Planejada para Etapa 3
+- 🔧 Maior presença em redes sociais - ✅ Em andamento
+- 🔧 Materiais de apoio para novos usuários - ✅ Planejada
+
+### Ajustes Implementados
+
+1. **Documentação Completa de Feedback:**
+   - Análise estatística detalhada realizada
+   - Depoimentos dos usuários compilados
+   - Análise de feedbacks com priorização de melhorias
+
+2. **Roadmap de Melhorias:**
+   - Integração com mapas priorizada para Etapa 3
+   - Estratégia de redes sociais em desenvolvimento
+   - Materiais de apoio planejados
+
+**Documentação Completa:**
+- 📊 [Relatório de Validação Completo](validation/validation_report.md)
+- 📋 [Definição do Público-Alvo](validation/target_audience.md)
+- 📈 [Análise Estatística](validation/feedback/statistical_analysis.md)
+- 💬 [Depoimentos dos Usuários](validation/feedback/user_testimonials.md)
+- 🔍 [Análise de Feedbacks](validation/feedback/analise_feedbacks.md)
 
 
 ---
 
 ## 📝 Status do Projeto
 
-**Fase Atual:** Implementação Completa ✅  
-**Progresso Técnico:** 100% (Aguardando apenas validação com público-alvo)  
-**Sistema:** Totalmente funcional e em produção
+**Fase Atual:** Implementação e Validação Completas ✅  
+**Progresso Técnico:** 100%  
+**Validação com Público-Alvo:** 100% (14 participantes, 100% aprovação)  
+**Sistema:** Totalmente funcional, validado e em produção
 
 🔗 **URL:** https://conecta-doacoes-fc684.web.app
 
@@ -332,6 +389,30 @@ Após a validação, os feedbacks coletados serão analisados e melhorias serão
 - 🗄️ [Schema do Banco de Dados](database/schema.md)
 - 🎨 [Protótipos Visuais](prototypes/)
 - ✅ [Testes Automatizados](frontend/web/tests/README.md)
+
+---
+
+## 👥 Equipe de Desenvolvimento
+
+**Membros da Equipe:**
+
+- **João Paulo da Silva Rodrigues** - Matrícula: 2319025  
+  ➡️ Desenvolvedor Principal
+
+- **José William Alves de Oliveira** - Matrícula: 2326237  
+  ➡️ Documentação
+
+- **Francisco Wanderson da Silva** - Matrícula: 2323860  
+  ➡️ Testes
+
+- **Rayane dos Santos Silva** - Matrícula: 2326292  
+  ➡️ Responsável pela Validação com Público-Alvo
+
+- **Kamilly Almeida Braz** - Matrícula: 2323788  
+  ➡️ Responsável pela Documentação da Validação
+
+- **Matheus de Lima Silva** - Matrícula: 2323842  
+  ➡️ Revisor de Código
 
 ---
 
@@ -372,6 +453,6 @@ Desenvolvido com ❤️ para a comunidade
 
 ---
 
-**Última Atualização:** 20/11/2025  
-**Versão:** 1.0.0 (MVP Completo - Aguardando Validação)
+**Última Atualização:** 30/11/2025  
+**Versão:** 1.0.0 (MVP Completo e Validado)
 
