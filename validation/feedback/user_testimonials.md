@@ -160,17 +160,10 @@ Os seguintes participantes optaram por não fazer comentários adicionais, indic
 
 **Por que é impactante:** Demonstra que o sistema toca emocionalmente os usuários
 
----
-
-**#2 - Apoio Espontâneo**
-> *"Não. Queria só parabenizar pela iniciativa"*  
-> — Jose William Alves Oliveira, Conjunto Ceará
-
-**Por que é impactante:** Usuário preferiu elogiar a não sugerir mudanças
 
 ---
 
-**#3 - Satisfação Expressa**
+**#2 - Satisfação Expressa**
 > *"Não, já está ótimo"*  
 > — Maria Thayane Silva Duarte, Mãe de 3 alunos
 
@@ -178,7 +171,7 @@ Os seguintes participantes optaram por não fazer comentários adicionais, indic
 
 ---
 
-**#4 - Sugestão Construtiva**
+**#3 - Sugestão Construtiva**
 > *"Achei tudo muito organizado, mas seria interessante adicionar um mapa no site para que as pessoas consigam visualizar facilmente os pontos de doação."*  
 > — Maria Valéria de Araújo, Coordenadora Escolar
 
@@ -186,7 +179,7 @@ Os seguintes participantes optaram por não fazer comentários adicionais, indic
 
 ---
 
-**#5 - Simplicidade Aprovada**
+**#4 - Simplicidade Aprovada**
 > *"Está ótimo já"*  
 > — Gracineide dos Santos Silva, Comunidade do Pecém
 

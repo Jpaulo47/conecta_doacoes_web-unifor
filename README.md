@@ -454,5 +454,5 @@ Desenvolvido com ❤️ para a comunidade
 ---
 
 **Última Atualização:** 30/11/2025  
-**Versão:** 1.0.0 (MVP Completo e Validado)
+**Versão:** 1.0.0
 
