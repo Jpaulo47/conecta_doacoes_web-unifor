@@ -101,14 +101,5 @@ Os testes cobrem:
 - ✅ Agrupamentos e filtros
 - ✅ Validação de formatos
 
-## Próximos Passos
-
-Para melhorar a cobertura de testes:
-1. Implementar testes de integração com Firebase Emulator
-2. Adicionar testes end-to-end (E2E)
-3. Implementar testes de UI (se necessário)
-4. Adicionar testes de performance
-
----
 
 **Última Atualização:** 19/11/2025
